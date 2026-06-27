@@ -664,30 +664,37 @@ function TeamSection() {
   return (
     <section id="nosotros" className="py-16 lg:py-24 bg-[--si-body-bg]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Badge variant="info" size="sm" className="uppercase tracking-wide mb-4">
-          Nuestros Audiólogos
-        </Badge>
-        <h2 className="text-3xl font-extrabold text-[--si-heading-color] mb-2">
-          Conocé a nuestros especialistas en salud auditiva
-        </h2>
-        <p className="text-[--si-body-color] mb-10">
-          En AudioColors contamos con especialistas comprometidos en brindarte una atención cercana
-          y personalizada.
-        </p>
-        <div className="grid sm:grid-cols-2 gap-8 max-w-2xl">
-          {TEAM.map((m) => (
-            <div key={m.name} className="flex flex-col items-center text-center">
-              <div className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-4 aspect-[4/3] bg-[--si-gray-100] relative flex items-center justify-center">
-                <img
-                  src={m.image}
-                  alt={m.alt}
-                  className="absolute inset-0 w-full h-full object-cover"
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Texto */}
+          <div>
+            <Badge variant="info" size="sm" className="uppercase tracking-wide mb-4">
+              Nuestros Audiólogos
+            </Badge>
+            <h2 className="text-3xl font-extrabold text-[--si-heading-color] mb-4">
+              Conocé a nuestros especialistas en salud auditiva
+            </h2>
+            <p className="text-[--si-body-color]">
+              En AudioColors contamos con especialistas comprometidos en brindarte una atención cercana
+              y personalizada.
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-2 gap-6">
+            {TEAM.map((m) => (
+              <div key={m.name} className="flex flex-col items-center text-center">
+                <div className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-3 aspect-[3/4] bg-[--si-gray-100] relative">
+                  <img
+                    src={m.image}
+                    alt={m.alt}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
                   />
+                </div>
+                <p className="text-xs text-[--si-body-color] uppercase tracking-wide">{m.role}</p>
+                <p className="font-bold text-[--si-heading-color] text-sm mt-0.5">{m.name}</p>
               </div>
-              <p className="text-sm text-[--si-body-color]">{m.role}</p>
-              <p className="font-bold text-[--si-heading-color]">{m.name}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
