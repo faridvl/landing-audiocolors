@@ -43,6 +43,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  icons: {
+    icon: "/favicon-32.png",
+    apple: "/favicon-180.png",
+  },
   openGraph: {
     type: "website",
     locale: "es_CR",

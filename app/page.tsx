@@ -185,31 +185,38 @@ function HeroSection() {
           </div>
 
           {/* Right */}
-          <div className="hidden lg:block">
-            <div className="relative w-full rounded-[--si-border-radius-xl] overflow-hidden aspect-[4/3] bg-[--si-gray-100]">
+          <div className="hidden lg:flex gap-4 h-[480px]">
+            {/* Foto equipo — columna principal */}
+            <div className="relative flex-1 rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]">
               <img
-                src="/images/hero-right.webp"
-                alt="Especialista en audiología atendiendo a paciente en AudioColors Costa Rica"
-                className="absolute inset-0 w-full h-full object-cover"
+                src="/images/team.webp"
+                alt="Equipo de audiólogos AudioColors — Matthew Arias y María José Durán"
+                className="absolute inset-0 w-full h-full object-cover object-top"
               />
-              {/* Orange card */}
-              <div
-                className="absolute left-4 bottom-4 rounded-[--si-border-radius-xl] p-5 shadow-[--si-shadow-xl]"
-                style={{ backgroundColor: "#f97316", width: "240px" }}
-              >
-              <p className="text-white text-xs font-semibold uppercase tracking-widest">audio</p>
-              <p className="text-white text-xl font-extrabold">COLORS</p>
-              <p className="text-white/70 text-[10px] uppercase tracking-widest mb-4">
-                Especialidades Audiológicas
-              </p>
-              <p className="text-white text-sm leading-relaxed">
-                Nos encargamos de combinar tecnología avanzada con un enfoque clínico especializado
-                para brindarte un diagnóstico preciso y un tratamiento adaptado a tus necesidades.
-              </p>
-              <p className="text-white text-sm leading-relaxed mt-3">
-                Siempre comprometidos con tu bienestar auditivo y tu calidad de vida.
-              </p>
             </div>
+            {/* Columna derecha — foto consultorio + card naranja */}
+            <div className="relative w-48 flex flex-col gap-4">
+              <div className="relative flex-1 rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]">
+                <img
+                  src="/images/hero-right.webp"
+                  alt="Especialista en audiología en AudioColors Costa Rica"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                />
+              </div>
+              {/* Card naranja */}
+              <div
+                className="rounded-[--si-border-radius-xl] p-4 shadow-[--si-shadow-xl] shrink-0"
+                style={{ backgroundColor: "#f97316" }}
+              >
+                <p className="text-white text-[10px] font-semibold uppercase tracking-widest">audio</p>
+                <p className="text-white text-base font-extrabold leading-tight">COLORS</p>
+                <p className="text-white/70 text-[9px] uppercase tracking-widest mt-0.5 mb-2">
+                  Especialidades Audiológicas
+                </p>
+                <p className="text-white text-xs leading-relaxed">
+                  Tecnología avanzada con enfoque clínico especializado para tu bienestar auditivo.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -713,7 +720,7 @@ const LOCATIONS = [
     address: "San Isidro de El General, Pérez Zeledón, San José",
     phone: "+506 8447-9893",
     email: "audiocolors@outlook.com",
-    mapSrc: "https://www.google.com/maps/embed/v1/place?key=AIzaSyC8S-B6J7LP3nPhl56WtP2B1wOXMwwNlE0&q=place_id:ChIJVVodgNNPoY8RkYuHCT7yYA8",
+    mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+PEREZ+ZELEDON,San+Isidro+El+General,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJVVodgNNPoY8RkYuHCT7yYA8",
   },
   {
@@ -723,7 +730,7 @@ const LOCATIONS = [
     address: "Detrás de la Ferretería Impala, Provincia de Puntarenas, Río Claro, 60703",
     phone: "+506 8447-9893",
     email: "audiocolors@outlook.com",
-    mapSrc: "https://www.google.com/maps/embed/v1/place?key=AIzaSyC8S-B6J7LP3nPhl56WtP2B1wOXMwwNlE0&q=place_id:ChIJ8algg8lPpI8RisOQMtVnDsU",
+    mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+RIO+CLARO,Rio+Claro,Puntarenas,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ8algg8lPpI8RisOQMtVnDsU",
   },
   {
@@ -733,7 +740,7 @@ const LOCATIONS = [
     address: "Ciudad Neily, Corredores, Puntarenas",
     phone: "+506 8447-9893",
     email: "audiocolors@outlook.com",
-    mapSrc: "https://www.google.com/maps/embed/v1/place?key=AIzaSyC8S-B6J7LP3nPhl56WtP2B1wOXMwwNlE0&q=place_id:ChIJN0I8vMVNpI8RhZ5HJnF7ST8",
+    mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+CIUDAD+NEILY,Ciudad+Neily,Corredores,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJN0I8vMVNpI8RhZ5HJnF7ST8",
   },
   {
