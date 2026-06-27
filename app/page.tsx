@@ -84,7 +84,7 @@ function Navbar() {
         <AudioColorsLogo />
 
         {/* Desktop nav */}
-        <nav style={{ display: "flex", alignItems: "center", gap: "1.75rem" }} className="hidden md:flex">
+        <nav className="hidden md:flex" style={{ alignItems: "center", gap: "1.75rem" }}>
           {NAV_LINKS.map((item) => (
             <a
               key={item.label}
@@ -180,7 +180,8 @@ function HeroSection() {
                 src="/images/team.jpg"
                 alt=""
                 className="w-full h-full object-cover absolute inset-0"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                style={{ display: "none" }}
+                onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
               />
               <span className="text-[--si-gray-400] text-sm font-medium select-none">Foto del equipo</span>
             </div>
@@ -193,7 +194,7 @@ function HeroSection() {
                 src="/images/hero-right.jpg"
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
               />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
                 <span className="text-[--si-gray-400] text-sm font-medium">Foto del especialista</span>
@@ -255,7 +256,7 @@ function CCSSSection() {
             src="/images/ccss.jpg"
             alt="Tramitamos recetas CCSS"
             className="absolute inset-0 w-full h-full object-cover"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+            style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
           />
           <span className="relative text-gray-400 text-sm font-medium select-none">Foto Recetas CCSS</span>
         </div>
@@ -352,7 +353,7 @@ function ServicesSection() {
                   src={s.image}
                   alt={s.title}
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                  style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
                 />
                 <div className="flex flex-col items-center gap-2 pointer-events-none select-none">
                   <div className="w-8 h-8 rounded-full" style={{ backgroundColor: s.color, opacity: 0.3 }} />
@@ -419,7 +420,7 @@ function ProductsSection() {
                   src={p.image}
                   alt={p.title}
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                  style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
                 />
                 <span className="text-white/80 text-sm font-medium select-none">{p.title}</span>
               </div>
@@ -456,7 +457,7 @@ function SponsorsSection() {
                 src={l.src}
                 alt={l.name}
                 className="absolute inset-0 w-full h-full object-contain p-2"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
               />
               <span className="text-[10px] text-[--si-gray-500] font-semibold text-center leading-tight px-1 select-none">{l.name}</span>
             </div>
@@ -496,7 +497,7 @@ function TeamSection() {
                   src={m.image}
                   alt={m.name}
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                  style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
                 />
                 <div className="flex flex-col items-center gap-2 select-none pointer-events-none">
                   <div className="w-16 h-16 rounded-full bg-[--si-gray-200] flex items-center justify-center text-2xl text-[--si-gray-400] font-bold">
