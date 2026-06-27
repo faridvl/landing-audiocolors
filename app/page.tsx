@@ -177,7 +177,7 @@ function HeroSection() {
             </p>
             <div className="rounded-[--si-border-radius-xl] overflow-hidden mt-2 lg:hidden aspect-[4/3] bg-[--si-gray-100] relative flex items-center justify-center">
               <img
-                src="/images/team.jpg"
+                src="/images/team.webp"
                 alt="Equipo de audiólogos de AudioColors en Costa Rica"
                 className="w-full h-full object-cover absolute inset-0"
                 style={{ display: "none" }}
@@ -191,7 +191,7 @@ function HeroSection() {
           <div className="hidden lg:block">
             <div className="relative w-full rounded-[--si-border-radius-xl] overflow-hidden aspect-[4/3] bg-[--si-gray-100]">
               <img
-                src="/images/hero-right.jpg"
+                src="/images/hero-right.webp"
                 alt="Especialista en audiología atendiendo a paciente en AudioColors Costa Rica"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
@@ -253,7 +253,7 @@ function CCSSSection() {
       <div className="grid lg:grid-cols-2 min-h-[500px]">
         <div className="relative overflow-hidden min-h-[300px] flex items-center justify-center" style={{ backgroundColor: "#374151" }}>
           <img
-            src="/images/ccss.jpg"
+            src="/images/ccss.webp"
             alt="AudioColors tramita recetas de audífonos de la CCSS en Costa Rica"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
@@ -523,7 +523,7 @@ const SERVICES = [
     color: "#3b82f6",
   },
   {
-    image: "/images/service-mantenimiento.jpg",
+    image: "/images/service-mantenimiento.webp",
     title: "Servicio de Mantenimiento",
     description:
       "Realizamos servicios de limpieza, revisión y ajustes de tus audífonos, garantizando su correcto funcionamiento y prolongando su vida útil.",
@@ -578,7 +578,7 @@ const PRODUCTS = [
       "Prótesis auditivas diseñadas para mejorar tu audición y tu calidad de vida. Contamos con modelos con conectividad al teléfono.",
   },
   {
-    image: "/images/product-deshumidificador.jpg",
+    image: "/images/product-deshumidificador.webp",
     title: "Deshumidificador",
     description:
       "Deshumidificador para audífonos, ideal para protegerlos de la humedad y alargar su vida útil. Fácil de usar y compatible con todo tipo de audífonos.",
@@ -668,8 +668,8 @@ function SponsorsSection() {
 // ── Team ──────────────────────────────────────────────────────────────────────
 
 const TEAM = [
-  { name: "Matthew Arias Mena", role: "MSc. Audiología", image: "/images/team-matthew.jpg", alt: "Matthew Arias Mena, Audiólogo MSc. en AudioColors Costa Rica" },
-  { name: "María José Durán Arias", role: "MSc. Audiología", image: "/images/team-mariajose.jpg", alt: "María José Durán Arias, Audióloga MSc. en AudioColors Costa Rica" },
+  { name: "Matthew Arias Mena", role: "MSc. Audiología", image: "/images/team-matthew.webp", alt: "Matthew Arias Mena, Audiólogo MSc. en AudioColors Costa Rica" },
+  { name: "María José Durán Arias", role: "MSc. Audiología", image: "/images/team-mariajose.webp", alt: "María José Durán Arias, Audióloga MSc. en AudioColors Costa Rica" },
 ];
 
 function TeamSection() {

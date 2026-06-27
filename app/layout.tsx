@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const SITE_URL = "https://www.audiocolors.cr";
+const SITE_URL = "https://audiocolors.com";
 const SITE_NAME = "AudioColors — Especialidades Audiológicas";
 const DESCRIPTION =
   "Clínica de audiología en Costa Rica. Audiometría, impedanciometría, prótesis auditivas y tramitamos recetas de audífonos de la CCSS. Sedes en Pérez Zeledón, Río Claro, Ciudad Neily y Quepos.";
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     "audiólogo Río Claro",
     "audiólogo Ciudad Neily",
     "audiólogo Quepos",
+    "audiólogo Uvita",
     "AudioColors",
     "especialidades audiológicas",
   ],
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "AudioColors — Especialidades Audiológicas en Costa Rica",
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: DESCRIPTION,
-    images: ["/images/og-image.jpg"],
+    images: ["/og-image.png"],
   },
 };
 
@@ -120,6 +121,17 @@ const LOCAL_BUSINESS_SCHEMA = {
       address: {
         "@type": "PostalAddress",
         addressLocality: "Quepos",
+        addressRegion: "Puntarenas",
+        addressCountry: "CR",
+      },
+      telephone: "+50688479893",
+    },
+    {
+      "@type": "MedicalClinic",
+      name: "AudioColors Uvita",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Uvita",
         addressRegion: "Puntarenas",
         addressCountry: "CR",
       },
