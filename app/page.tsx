@@ -624,27 +624,29 @@ function ProductsSection() {
 
 // ── Sponsors ──────────────────────────────────────────────────────────────────
 
+const CONVENIOS = [
+  { name: "Banco Popular y de Desarrollo Comunal", src: "/images/logo-banco-popular.webp" },
+  { name: "Sociedad de Seguros del Magisterio Nacional", src: "/images/logo-magisterio.webp" },
+  { name: "Costa Rica Health Medical Center", src: "/images/logo-medical-center.webp" },
+  { name: "Centro Médico Yireh", src: "/images/logo-yireh.webp" },
+  { name: "Clínica Nazareth", src: "/images/logo-clinica-nazareth.webp" },
+];
+
 function SponsorsSection() {
-  const logos = [
-    { name: "CCSS", src: "/images/logo-ccss.png" },
-    { name: "Banco Popular", src: "/images/logo-banco-popular.png" },
-    { name: "Magisterio Nacional", src: "/images/logo-magisterio.png" },
-  ];
   return (
     <section className="py-12 bg-[--si-body-bg] border-b border-[--si-border-color]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="text-sm font-semibold text-[--si-body-color] uppercase tracking-widest mb-8">
-          Sponsored by:
+          Convenios
         </p>
-        <div className="flex flex-wrap items-center gap-10">
-          {logos.map((l) => (
-            <div key={l.name} className="h-20 w-20 relative flex items-center justify-center bg-[--si-gray-100] rounded-[--si-border-radius]">
+        <div className="flex flex-wrap items-center gap-8">
+          {CONVENIOS.map((l) => (
+            <div key={l.name} className="h-20 w-36 relative flex items-center justify-center bg-white rounded-[--si-border-radius] border border-[--si-border-color] px-3 py-2">
               <img
                 src={l.src}
                 alt={l.name}
-                className="absolute inset-0 w-full h-full object-contain p-2"
+                className="w-full h-full object-contain"
               />
-              <span className="text-[10px] text-[--si-gray-500] font-semibold text-center leading-tight px-1 select-none">{l.name}</span>
             </div>
           ))}
         </div>
@@ -889,14 +891,14 @@ const FOOTER_COLUMNS = [
     ],
   },
   {
-    title: "Seguínos",
+    title: "Seguinos",
     links: [
       { label: "Instagram", href: "https://instagram.com" },
       { label: "Facebook", href: "https://facebook.com" },
     ],
   },
   {
-    title: "Contactanos",
+    title: "Contactános",
     links: [
       { label: "+506 8447-9893", href: "https://wa.me/50688479893" },
       { label: "audiocolors@outlook.com", href: "mailto:audiocolors@outlook.com" },
