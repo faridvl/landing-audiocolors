@@ -308,56 +308,45 @@ function GoogleIcon() {
   );
 }
 
-const REVIEWS = [
-  {
-    name: "Ana Rodríguez",
-    rating: 5,
-    date: "Hace 2 semanas",
-    text: "Excelente atención de parte de todo el equipo. Me realizaron la audiometría de manera muy profesional y me explicaron cada paso del proceso. Totalmente recomendados.",
-    location: "Pérez Zeledón",
-  },
-  {
-    name: "Carlos Méndez",
-    rating: 5,
-    date: "Hace 1 mes",
-    text: "Muy buena experiencia. Tramitaron mi receta de la CCSS sin ningún problema y en poco tiempo ya tenía mis audífonos. El seguimiento post-adaptación también fue muy bueno.",
-    location: "Río Claro",
-  },
-  {
-    name: "Ligia Brenes",
-    rating: 5,
-    date: "Hace 1 mes",
-    text: "Profesionales de primer nivel. Me atendieron con mucha paciencia y me dieron todas las opciones disponibles para mi caso. Muy satisfecha con el servicio.",
-    location: "Ciudad Neily",
-  },
-  {
-    name: "Roberto Elizondo",
-    rating: 5,
-    date: "Hace 2 meses",
-    text: "Gran equipo de audiólogos. El servicio de mantenimiento de mis audífonos fue rápido y efectivo. Sin duda volvería y los recomendaría a cualquier persona que necesite atención auditiva.",
-    location: "Quepos",
-  },
-];
+type Review = {
+  name: string;
+  rating: number;
+  text: string;
+  date: string;
+  location: string;
+  profilePhoto: string | null;
+};
 
 function ReviewsSection() {
+  const [reviews, setReviews] = React.useState<Review[]>([]);
+  const [loading, setLoading] = React.useState(true);
   const trackRef = React.useRef<HTMLDivElement>(null);
   const [active, setActive] = React.useState(0);
   const pausedRef = React.useRef(false);
 
-  // Auto-advance every 4 s; pause on hover/touch
   React.useEffect(() => {
+    fetch("/api/reviews")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.reviews?.length) setReviews(data.reviews);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  React.useEffect(() => {
+    if (reviews.length === 0) return;
     const id = setInterval(() => {
       if (pausedRef.current) return;
       setActive((prev) => {
-        const next = (prev + 1) % REVIEWS.length;
-        scrollTo(next);
+        const next = (prev + 1) % reviews.length;
+        scrollToCard(next);
         return next;
       });
     }, 4000);
     return () => clearInterval(id);
-  }, []);
+  }, [reviews.length]);
 
-  function scrollTo(index: number) {
+  function scrollToCard(index: number) {
     const track = trackRef.current;
     if (!track) return;
     const card = track.children[index] as HTMLElement;
@@ -367,16 +356,15 @@ function ReviewsSection() {
 
   function handleDotClick(i: number) {
     setActive(i);
-    scrollTo(i);
+    scrollToCard(i);
   }
 
-  // Sync active dot when user manually swipes
   function handleScroll() {
     const track = trackRef.current;
     if (!track) return;
     const cardWidth = (track.children[0] as HTMLElement)?.offsetWidth ?? 1;
-    const idx = Math.round(track.scrollLeft / cardWidth);
-    setActive(Math.min(idx, REVIEWS.length - 1));
+    const idx = Math.round(track.scrollLeft / (cardWidth + 20));
+    setActive(Math.min(idx, reviews.length - 1));
   }
 
   return (
@@ -401,81 +389,97 @@ function ReviewsSection() {
         </div>
       </div>
 
-      {/* Full-bleed scrollable track */}
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        onMouseEnter={() => { pausedRef.current = true; }}
-        onMouseLeave={() => { pausedRef.current = false; }}
-        onTouchStart={() => { pausedRef.current = true; }}
-        onTouchEnd={() => { pausedRef.current = false; }}
-        style={{
-          display: "flex",
-          gap: "1.25rem",
-          overflowX: "auto",
-          scrollSnapType: "x mandatory",
-          scrollbarWidth: "none",
-          WebkitOverflowScrolling: "touch",
-          paddingLeft: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))",
-          paddingRight: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))",
-          paddingBottom: "0.5rem",
-        }}
-      >
-        {REVIEWS.map((r) => (
+      {loading ? (
+        <div className="flex justify-center py-16">
           <div
-            key={r.name}
-            style={{
-              flex: "0 0 min(320px, 80vw)",
-              scrollSnapAlign: "start",
-            }}
-            className="flex flex-col gap-3 rounded-[--si-border-radius-xl] p-5 border border-[--si-border-color] bg-[--si-body-bg] shadow-[--si-shadow-sm]"
-          >
-            <div className="flex items-center gap-3">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
-                style={{ backgroundColor: "var(--si-primary)" }}
-              >
-                {r.name.charAt(0)}
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-[--si-heading-color] text-sm truncate">{r.name}</p>
-                <p className="text-xs text-[--si-body-color]">{r.date}</p>
-              </div>
-            </div>
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <StarIcon key={i} filled={i <= r.rating} />
-              ))}
-            </div>
-            <p className="text-sm text-[--si-body-color] leading-relaxed flex-1">{r.text}</p>
-            <div className="flex items-center gap-1.5 pt-1 border-t border-[--si-border-color]">
-              <GoogleIcon />
-              <span className="text-xs text-[--si-body-color]">{r.location}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Dot indicators */}
-      <div className="flex justify-center gap-2 mt-6">
-        {REVIEWS.map((_, i) => (
-          <button
-            key={i}
-            aria-label={`Ir a reseña ${i + 1}`}
-            onClick={() => handleDotClick(i)}
-            style={{
-              width: i === active ? "1.5rem" : "0.5rem",
-              height: "0.5rem",
-              borderRadius: "9999px",
-              border: "none",
-              cursor: "pointer",
-              transition: "width 0.3s, background-color 0.3s",
-              backgroundColor: i === active ? "var(--si-primary)" : "var(--si-gray-300)",
-              padding: 0,
-            }}
+            className="w-8 h-8 rounded-full border-2 border-[--si-primary] border-t-transparent animate-spin"
           />
-        ))}
-      </div>
+        </div>
+      ) : (
+        <>
+          {/* Full-bleed scrollable track */}
+          <div
+            ref={trackRef}
+            onScroll={handleScroll}
+            onMouseEnter={() => { pausedRef.current = true; }}
+            onMouseLeave={() => { pausedRef.current = false; }}
+            onTouchStart={() => { pausedRef.current = true; }}
+            onTouchEnd={() => { pausedRef.current = false; }}
+            style={{
+              display: "flex",
+              gap: "1.25rem",
+              overflowX: "auto",
+              scrollSnapType: "x mandatory",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+              paddingLeft: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))",
+              paddingRight: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))",
+              paddingBottom: "0.5rem",
+            }}
+          >
+            {reviews.map((r, idx) => (
+              <div
+                key={idx}
+                style={{ flex: "0 0 min(320px, 80vw)", scrollSnapAlign: "start" }}
+                className="flex flex-col gap-3 rounded-[--si-border-radius-xl] p-5 border border-[--si-border-color] bg-[--si-body-bg] shadow-[--si-shadow-sm]"
+              >
+                <div className="flex items-center gap-3">
+                  {r.profilePhoto ? (
+                    <img
+                      src={r.profilePhoto}
+                      alt={r.name}
+                      className="w-10 h-10 rounded-full object-cover shrink-0"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
+                      style={{ backgroundColor: "var(--si-primary)" }}
+                    >
+                      {r.name.charAt(0)}
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="font-semibold text-[--si-heading-color] text-sm truncate">{r.name}</p>
+                    <p className="text-xs text-[--si-body-color]">{r.date}</p>
+                  </div>
+                </div>
+                <div className="flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <StarIcon key={i} filled={i <= r.rating} />
+                  ))}
+                </div>
+                <p className="text-sm text-[--si-body-color] leading-relaxed flex-1">{r.text}</p>
+                <div className="flex items-center gap-1.5 pt-1 border-t border-[--si-border-color]">
+                  <GoogleIcon />
+                  <span className="text-xs text-[--si-body-color]">{r.location}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-6">
+            {reviews.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Ir a reseña ${i + 1}`}
+                onClick={() => handleDotClick(i)}
+                style={{
+                  width: i === active ? "1.5rem" : "0.5rem",
+                  height: "0.5rem",
+                  borderRadius: "9999px",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "width 0.3s, background-color 0.3s",
+                  backgroundColor: i === active ? "var(--si-primary)" : "var(--si-gray-300)",
+                  padding: 0,
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }
