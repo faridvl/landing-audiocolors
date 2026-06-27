@@ -710,8 +710,9 @@ const LOCATIONS = [
     clinic: "Clínica AudioColors Pérez Zeledón",
     address: "San Isidro de El General, Pérez Zeledón, San José",
     phone: "+506 8447-9893",
-    email: "audiocolors@gmail.com",
-    mapSrc: "https://maps.google.com/maps?q=Perez+Zeledon+Costa+Rica&output=embed",
+    email: "audiocolors@outlook.com",
+    mapSrc: "https://www.google.com/maps/embed/v1/place?key=AIzaSyC8S-B6J7LP3nPhl56WtP2B1wOXMwwNlE0&q=place_id:ChIJVVodgNNPoY8RkYuHCT7yYA8",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJVVodgNNPoY8RkYuHCT7yYA8",
   },
   {
     id: "rio-claro",
@@ -719,8 +720,9 @@ const LOCATIONS = [
     clinic: "Centro Médico Yireh, Río Claro",
     address: "Detrás de la Ferretería Impala, Provincia de Puntarenas, Río Claro, 60703",
     phone: "+506 8447-9893",
-    email: "audiocolors@gmail.com",
-    mapSrc: "https://maps.google.com/maps?q=Rio+Claro+Puntarenas+Costa+Rica&output=embed",
+    email: "audiocolors@outlook.com",
+    mapSrc: "https://www.google.com/maps/embed/v1/place?key=AIzaSyC8S-B6J7LP3nPhl56WtP2B1wOXMwwNlE0&q=place_id:ChIJ8algg8lPpI8RisOQMtVnDsU",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ8algg8lPpI8RisOQMtVnDsU",
   },
   {
     id: "ciudad-neily",
@@ -728,8 +730,9 @@ const LOCATIONS = [
     clinic: "AudioColors Ciudad Neily",
     address: "Ciudad Neily, Corredores, Puntarenas",
     phone: "+506 8447-9893",
-    email: "audiocolors@gmail.com",
-    mapSrc: "https://maps.google.com/maps?q=Ciudad+Neily+Costa+Rica&output=embed",
+    email: "audiocolors@outlook.com",
+    mapSrc: "https://www.google.com/maps/embed/v1/place?key=AIzaSyC8S-B6J7LP3nPhl56WtP2B1wOXMwwNlE0&q=place_id:ChIJN0I8vMVNpI8RhZ5HJnF7ST8",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJN0I8vMVNpI8RhZ5HJnF7ST8",
   },
   {
     id: "quepos",
@@ -737,8 +740,9 @@ const LOCATIONS = [
     clinic: "AudioColors Quepos",
     address: "Quepos, Puntarenas, Costa Rica",
     phone: "+506 8447-9893",
-    email: "audiocolors@gmail.com",
+    email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=Quepos+Puntarenas+Costa+Rica&output=embed",
+    reviewUrl: "https://maps.google.com/maps?q=AudioColors+Quepos",
   },
   {
     id: "uvita",
@@ -746,8 +750,9 @@ const LOCATIONS = [
     clinic: "AudioColors Uvita",
     address: "Uvita, Osa, Puntarenas, Costa Rica",
     phone: "+506 8447-9893",
-    email: "audiocolors@gmail.com",
+    email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=Uvita+Osa+Puntarenas+Costa+Rica&output=embed",
+    reviewUrl: "https://maps.google.com/maps?q=AudioColors+Uvita",
   },
 ];
 
@@ -815,9 +820,11 @@ function LocationsSection() {
                       ¿Te gustó tu visita? Ayudanos dejando un comentario en Google sobre tu
                       experiencia en AudioColors.
                     </p>
-                    <Button variant="outline" size="sm">
-                      Añadir reseña
-                    </Button>
+                    <a href={loc.reviewUrl} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="sm">
+                        Añadir reseña en Google
+                      </Button>
+                    </a>
                   </div>
                 </div>
 
@@ -892,7 +899,7 @@ const FOOTER_COLUMNS = [
     title: "Contactanos",
     links: [
       { label: "+506 8447-9893", href: "https://wa.me/50688479893" },
-      { label: "audiocolors@gmail.com", href: "mailto:audiocolors@gmail.com" },
+      { label: "audiocolors@outlook.com", href: "mailto:audiocolors@outlook.com" },
     ],
   },
 ];

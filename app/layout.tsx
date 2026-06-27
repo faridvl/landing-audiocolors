@@ -75,7 +75,7 @@ const LOCAL_BUSINESS_SCHEMA = {
   description: DESCRIPTION,
   url: SITE_URL,
   telephone: "+50688479893",
-  email: "audiocolors@gmail.com",
+  email: "audiocolors@outlook.com",
   medicalSpecialty: "Audiology",
   openingHours: "Mo-Fr 08:00-16:00",
   areaServed: "Costa Rica",
