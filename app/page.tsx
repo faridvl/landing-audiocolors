@@ -175,15 +175,12 @@ function HeroSection() {
                 Leer más
               </a>
             </p>
-            <div className="rounded-[--si-border-radius-xl] overflow-hidden mt-2 lg:hidden aspect-[4/3] bg-[--si-gray-100] relative flex items-center justify-center">
+            <div className="rounded-[--si-border-radius-xl] overflow-hidden mt-2 lg:hidden aspect-[4/3] bg-[--si-gray-100] relative">
               <img
                 src="/images/team.webp"
                 alt="Equipo de audiólogos de AudioColors en Costa Rica"
                 className="w-full h-full object-cover absolute inset-0"
-                style={{ display: "none" }}
-                onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
               />
-              <span className="text-[--si-gray-400] text-sm font-medium select-none">Foto del equipo</span>
             </div>
           </div>
 
@@ -194,11 +191,7 @@ function HeroSection() {
                 src="/images/hero-right.webp"
                 alt="Especialista en audiología atendiendo a paciente en AudioColors Costa Rica"
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
               />
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-                <span className="text-[--si-gray-400] text-sm font-medium">Foto del especialista</span>
-              </div>
               {/* Orange card */}
               <div
                 className="absolute left-4 bottom-4 rounded-[--si-border-radius-xl] p-5 shadow-[--si-shadow-xl]"
@@ -256,9 +249,7 @@ function CCSSSection() {
             src="/images/ccss.webp"
             alt="AudioColors tramita recetas de audífonos de la CCSS en Costa Rica"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
           />
-          <span className="relative text-gray-400 text-sm font-medium select-none">Foto Recetas CCSS</span>
         </div>
         <div className="flex items-center justify-center lg:justify-end px-6 lg:px-12 py-16">
           <div className="bg-white rounded-[--si-border-radius-xl] p-8 w-full max-w-md shadow-[--si-shadow-xl]">
@@ -550,8 +541,7 @@ function ServicesSection() {
                   src={s.image}
                   alt={s.title}
                   className="absolute inset-0 w-full h-full object-cover"
-                  style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
-                />
+                  />
                 <div className="flex flex-col items-center gap-2 pointer-events-none select-none">
                   <div className="w-8 h-8 rounded-full" style={{ backgroundColor: s.color, opacity: 0.3 }} />
                   <span className="text-xs text-[--si-gray-400]">{s.title}</span>
@@ -617,8 +607,7 @@ function ProductsSection() {
                   src={p.image}
                   alt={p.title}
                   className="absolute inset-0 w-full h-full object-cover"
-                  style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
-                />
+                  />
                 <span className="text-white/80 text-sm font-medium select-none">{p.title}</span>
               </div>
               <CardContent className="p-5">
@@ -654,7 +643,6 @@ function SponsorsSection() {
                 src={l.src}
                 alt={l.name}
                 className="absolute inset-0 w-full h-full object-contain p-2"
-                style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
               />
               <span className="text-[10px] text-[--si-gray-500] font-semibold text-center leading-tight px-1 select-none">{l.name}</span>
             </div>
@@ -694,14 +682,7 @@ function TeamSection() {
                   src={m.image}
                   alt={m.alt}
                   className="absolute inset-0 w-full h-full object-cover"
-                  style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
-                />
-                <div className="flex flex-col items-center gap-2 select-none pointer-events-none">
-                  <div className="w-16 h-16 rounded-full bg-[--si-gray-200] flex items-center justify-center text-2xl text-[--si-gray-400] font-bold">
-                    {m.name.charAt(0)}
-                  </div>
-                  <span className="text-xs text-[--si-gray-400]">Foto próximamente</span>
-                </div>
+                  />
               </div>
               <p className="text-sm text-[--si-body-color]">{m.role}</p>
               <p className="font-bold text-[--si-heading-color]">{m.name}</p>
