@@ -1,26 +1,158 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+@source "../node_modules/silicon-system/packages/silicon-ui/dist/index.mjs";
+@source "../silicon-safelist.js";
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Silicon design tokens */
+  --si-primary: #1a56db;
+  --si-primary-faded: rgba(26, 86, 219, 0.12);
+  --si-secondary: #eff2fc;
+  --si-success: #22c55e;
+  --si-info: #4c82f7;
+  --si-warning: #ffba08;
+  --si-danger: #ef4444;
+  --si-dark: #0b0f19;
+  --si-white: #ffffff;
+  --si-gray-100: #f3f4f6;
+  --si-gray-200: #e5e7eb;
+  --si-gray-300: #d1d5db;
+  --si-gray-400: #9ca3af;
+  --si-gray-500: #6b7280;
+  --si-gray-600: #4b5563;
+  --si-gray-700: #374151;
+  --si-gray-800: #1f2937;
+  --si-gray-900: #111827;
+
+  --si-body-bg: #ffffff;
+  --si-body-color: #374151;
+  --si-heading-color: #0b0f19;
+  --si-secondary-bg: #f9fafb;
+  --si-card-bg: #ffffff;
+
+  --si-font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --si-font-size-base: 1rem;
+  --si-line-height-base: 1.625;
+
+  --si-border-color: #e5e7eb;
+  --si-border-radius: 0.5rem;
+  --si-border-radius-sm: 0.25rem;
+  --si-border-radius-lg: 0.75rem;
+  --si-border-radius-xl: 1rem;
+  --si-border-radius-pill: 50rem;
+
+  --si-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --si-shadow: 0 0.5rem 1.125rem -0.5rem rgba(0, 0, 0, 0.15);
+  --si-shadow-lg: 0 1.125rem 2.5rem -0.5rem rgba(0, 0, 0, 0.15);
+  --si-shadow-xl: 0 1.5rem 3.5rem -0.5rem rgba(0, 0, 0, 0.2);
+
+  --si-transition-base: all 0.25s ease-in-out;
+
+  /* AudioColors brand overrides */
+  --ac-orange: #f97316;
+  --ac-navy: #1e293b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --radius-pill: 50rem;
+  --spacing-13: 3.25rem;
+  --spacing-15: 3.75rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--si-body-bg);
+  color: var(--si-body-color);
+  font-family: var(--si-font-family);
+  margin: 0;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--si-heading-color);
+  font-family: var(--si-font-family);
+}
+
+/* ── Silicon UI component base styles ───────────────────────────────────────
+   Tailwind v4 + Turbopack don't scan node_modules, so we define the
+   component styles that silicon-ui applies via Tailwind class names.       */
+
+/* Button */
+button[class*="rounded-pill"],
+a > button[class*="rounded-pill"] {
+  border-radius: var(--si-border-radius-pill);
+}
+
+/* Ensure silicon-ui Button variants render correctly */
+.bg-\[--si-primary\] { background-color: var(--si-primary); }
+.bg-\[--si-secondary\] { background-color: var(--si-secondary); }
+.bg-\[--si-danger\] { background-color: var(--si-danger); }
+.bg-\[--si-dark\] { background-color: var(--si-dark); }
+.bg-\[--si-primary-faded\] { background-color: var(--si-primary-faded); }
+.bg-\[--si-body-bg\] { background-color: var(--si-body-bg); }
+.bg-\[--si-body-bg\]\/90 { background-color: color-mix(in srgb, var(--si-body-bg) 90%, transparent); }
+.bg-\[--si-gray-100\] { background-color: var(--si-gray-100); }
+.bg-\[--si-gray-300\] { background-color: var(--si-gray-300); }
+.bg-\[--si-card-bg\] { background-color: var(--si-card-bg); }
+.bg-\[--si-secondary-bg\] { background-color: var(--si-secondary-bg); }
+.bg-\[--si-border-color\] { background-color: var(--si-border-color); }
+.bg-\[--si-success\] { background-color: var(--si-success); }
+.bg-\[--si-info\] { background-color: var(--si-info); }
+.bg-\[--si-warning\] { background-color: var(--si-warning); }
+.bg-\[--si-primary\]\/10 { background-color: color-mix(in srgb, var(--si-primary) 10%, transparent); }
+.bg-\[--si-primary\]\/20 { background-color: color-mix(in srgb, var(--si-primary) 20%, transparent); }
+.bg-\[--si-secondary\]\/50 { background-color: color-mix(in srgb, var(--si-secondary) 50%, transparent); }
+
+.text-\[--si-primary\] { color: var(--si-primary); }
+.text-\[--si-body-color\] { color: var(--si-body-color); }
+.text-\[--si-heading-color\] { color: var(--si-heading-color); }
+.text-\[--si-dark\] { color: var(--si-dark); }
+.text-\[--si-gray-400\] { color: var(--si-gray-400); }
+.text-\[--si-gray-500\] { color: var(--si-gray-500); }
+
+.border-\[--si-border-color\] { border-color: var(--si-border-color); }
+.border-\[--si-primary\] { border-color: var(--si-primary); }
+.border-\[--si-danger\] { border-color: var(--si-danger); }
+
+.shadow-\[--si-shadow\] { box-shadow: var(--si-shadow); }
+.shadow-\[--si-shadow-sm\] { box-shadow: var(--si-shadow-sm); }
+.shadow-\[--si-shadow-lg\] { box-shadow: var(--si-shadow-lg); }
+.shadow-\[--si-shadow-xl\] { box-shadow: var(--si-shadow-xl); }
+
+.divide-\[--si-border-color\] > * + * { border-color: var(--si-border-color); }
+
+.ring-\[--si-primary\] { --tw-ring-color: var(--si-primary); }
+.ring-\[--si-danger\] { --tw-ring-color: var(--si-danger); }
+.ring-\[--si-dark\] { --tw-ring-color: var(--si-dark); }
+
+.focus-visible\:ring-\[--si-primary\]:focus-visible { outline-color: var(--si-primary); }
+.focus-visible\:ring-\[--si-danger\]:focus-visible { outline-color: var(--si-danger); }
+
+.accent-\[--si-primary\] { accent-color: var(--si-primary); }
+.caret-\[--si-primary\] { caret-color: var(--si-primary); }
+
+/* Shadow with arbitrary value syntax */
+.shadow-\[0_4px_16px_rgba\(99\,102\,241\,0\.35\)\] {
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+}
+
+/* Hover with bg vars */
+.hover\:bg-\[--si-primary\]:hover { background-color: var(--si-primary); }
+.hover\:bg-\[--si-primary-faded\]:hover { background-color: var(--si-primary-faded); }
+.hover\:text-\[--si-primary\]:hover { color: var(--si-primary); }
+.hover\:text-white:hover { color: white; }
+
+/* Badge info variant */
+.bg-\[--si-info\]\/10 { background-color: color-mix(in srgb, var(--si-info) 10%, transparent); }
+.bg-\[--si-info\]\/20 { background-color: color-mix(in srgb, var(--si-info) 20%, transparent); }
+.text-\[--si-info\] { color: var(--si-info); }
+
+/* Tabs */
+.bg-\[--si-secondary\] { background-color: var(--si-secondary); }
+
+/* Grid rows for accordion */
+.grid-rows-\[1fr\] { grid-template-rows: 1fr; }
+.grid-rows-\[0fr\] { grid-template-rows: 0fr; }

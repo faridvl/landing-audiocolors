@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@silicon/ui": ["./node_modules/silicon-system/packages/silicon-ui"]
     }
   },
   "include": [
