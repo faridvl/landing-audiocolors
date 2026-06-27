@@ -178,7 +178,7 @@ function HeroSection() {
             <div className="rounded-[--si-border-radius-xl] overflow-hidden mt-2 lg:hidden aspect-[4/3] bg-[--si-gray-100] relative flex items-center justify-center">
               <img
                 src="/images/team.jpg"
-                alt=""
+                alt="Equipo de audiólogos de AudioColors en Costa Rica"
                 className="w-full h-full object-cover absolute inset-0"
                 style={{ display: "none" }}
                 onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
@@ -192,7 +192,7 @@ function HeroSection() {
             <div className="relative w-full rounded-[--si-border-radius-xl] overflow-hidden aspect-[4/3] bg-[--si-gray-100]">
               <img
                 src="/images/hero-right.jpg"
-                alt=""
+                alt="Especialista en audiología atendiendo a paciente en AudioColors Costa Rica"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
               />
@@ -254,7 +254,7 @@ function CCSSSection() {
         <div className="relative overflow-hidden min-h-[300px] flex items-center justify-center" style={{ backgroundColor: "#374151" }}>
           <img
             src="/images/ccss.jpg"
-            alt="Tramitamos recetas CCSS"
+            alt="AudioColors tramita recetas de audífonos de la CCSS en Costa Rica"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
           />
@@ -282,6 +282,199 @@ function CCSSSection() {
             </a>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Reviews ───────────────────────────────────────────────────────────────────
+
+function StarIcon({ filled }: { filled: boolean }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? "#f59e0b" : "none"} stroke="#f59e0b" strokeWidth="1.5" aria-hidden="true">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-label="Google" role="img">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+    </svg>
+  );
+}
+
+const REVIEWS = [
+  {
+    name: "Ana Rodríguez",
+    rating: 5,
+    date: "Hace 2 semanas",
+    text: "Excelente atención de parte de todo el equipo. Me realizaron la audiometría de manera muy profesional y me explicaron cada paso del proceso. Totalmente recomendados.",
+    location: "Pérez Zeledón",
+  },
+  {
+    name: "Carlos Méndez",
+    rating: 5,
+    date: "Hace 1 mes",
+    text: "Muy buena experiencia. Tramitaron mi receta de la CCSS sin ningún problema y en poco tiempo ya tenía mis audífonos. El seguimiento post-adaptación también fue muy bueno.",
+    location: "Río Claro",
+  },
+  {
+    name: "Ligia Brenes",
+    rating: 5,
+    date: "Hace 1 mes",
+    text: "Profesionales de primer nivel. Me atendieron con mucha paciencia y me dieron todas las opciones disponibles para mi caso. Muy satisfecha con el servicio.",
+    location: "Ciudad Neily",
+  },
+  {
+    name: "Roberto Elizondo",
+    rating: 5,
+    date: "Hace 2 meses",
+    text: "Gran equipo de audiólogos. El servicio de mantenimiento de mis audífonos fue rápido y efectivo. Sin duda volvería y los recomendaría a cualquier persona que necesite atención auditiva.",
+    location: "Quepos",
+  },
+];
+
+function ReviewsSection() {
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const [active, setActive] = React.useState(0);
+  const pausedRef = React.useRef(false);
+
+  // Auto-advance every 4 s; pause on hover/touch
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      if (pausedRef.current) return;
+      setActive((prev) => {
+        const next = (prev + 1) % REVIEWS.length;
+        scrollTo(next);
+        return next;
+      });
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  function scrollTo(index: number) {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.children[index] as HTMLElement;
+    if (!card) return;
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  }
+
+  function handleDotClick(i: number) {
+    setActive(i);
+    scrollTo(i);
+  }
+
+  // Sync active dot when user manually swipes
+  function handleScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const cardWidth = (track.children[0] as HTMLElement)?.offsetWidth ?? 1;
+    const idx = Math.round(track.scrollLeft / cardWidth);
+    setActive(Math.min(idx, REVIEWS.length - 1));
+  }
+
+  return (
+    <section className="py-16 lg:py-24 bg-[--si-body-bg] overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-wrap items-start justify-between gap-6 mb-10">
+          <div>
+            <Badge variant="info" size="sm" className="uppercase tracking-wide mb-4">
+              Reseñas
+            </Badge>
+            <h2 className="text-3xl font-extrabold text-[--si-heading-color] mb-2">
+              Qué opinan nuestros clientes
+            </h2>
+            <p className="text-[--si-body-color] max-w-xl">
+              La experiencia de nuestros pacientes nos inspira a seguir mejorando cada día.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <GoogleIcon />
+            <span className="text-sm font-semibold text-[--si-heading-color]">Google Reviews</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Full-bleed scrollable track */}
+      <div
+        ref={trackRef}
+        onScroll={handleScroll}
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+        onTouchStart={() => { pausedRef.current = true; }}
+        onTouchEnd={() => { pausedRef.current = false; }}
+        style={{
+          display: "flex",
+          gap: "1.25rem",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          WebkitOverflowScrolling: "touch",
+          paddingLeft: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))",
+          paddingRight: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))",
+          paddingBottom: "0.5rem",
+        }}
+      >
+        {REVIEWS.map((r) => (
+          <div
+            key={r.name}
+            style={{
+              flex: "0 0 min(320px, 80vw)",
+              scrollSnapAlign: "start",
+            }}
+            className="flex flex-col gap-3 rounded-[--si-border-radius-xl] p-5 border border-[--si-border-color] bg-[--si-body-bg] shadow-[--si-shadow-sm]"
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
+                style={{ backgroundColor: "var(--si-primary)" }}
+              >
+                {r.name.charAt(0)}
+              </div>
+              <div className="min-w-0">
+                <p className="font-semibold text-[--si-heading-color] text-sm truncate">{r.name}</p>
+                <p className="text-xs text-[--si-body-color]">{r.date}</p>
+              </div>
+            </div>
+            <div className="flex gap-0.5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <StarIcon key={i} filled={i <= r.rating} />
+              ))}
+            </div>
+            <p className="text-sm text-[--si-body-color] leading-relaxed flex-1">{r.text}</p>
+            <div className="flex items-center gap-1.5 pt-1 border-t border-[--si-border-color]">
+              <GoogleIcon />
+              <span className="text-xs text-[--si-body-color]">{r.location}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-2 mt-6">
+        {REVIEWS.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Ir a reseña ${i + 1}`}
+            onClick={() => handleDotClick(i)}
+            style={{
+              width: i === active ? "1.5rem" : "0.5rem",
+              height: "0.5rem",
+              borderRadius: "9999px",
+              border: "none",
+              cursor: "pointer",
+              transition: "width 0.3s, background-color 0.3s",
+              backgroundColor: i === active ? "var(--si-primary)" : "var(--si-gray-300)",
+              padding: 0,
+            }}
+          />
+        ))}
       </div>
     </section>
   );
@@ -471,8 +664,8 @@ function SponsorsSection() {
 // ── Team ──────────────────────────────────────────────────────────────────────
 
 const TEAM = [
-  { name: "Matthew Arias Mena", role: "MSc. Audiología", image: "/images/team-matthew.jpg" },
-  { name: "María José Durán Arias", role: "MSc. Audiología", image: "/images/team-mariajose.jpg" },
+  { name: "Matthew Arias Mena", role: "MSc. Audiología", image: "/images/team-matthew.jpg", alt: "Matthew Arias Mena, Audiólogo MSc. en AudioColors Costa Rica" },
+  { name: "María José Durán Arias", role: "MSc. Audiología", image: "/images/team-mariajose.jpg", alt: "María José Durán Arias, Audióloga MSc. en AudioColors Costa Rica" },
 ];
 
 function TeamSection() {
@@ -495,7 +688,7 @@ function TeamSection() {
               <div className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-4 aspect-[4/3] bg-[--si-gray-100] relative flex items-center justify-center">
                 <img
                   src={m.image}
-                  alt={m.name}
+                  alt={m.alt}
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{ display: "none" }} onLoad={(e) => { (e.target as HTMLImageElement).style.display = "block"; }}
                 />
@@ -555,6 +748,15 @@ const LOCATIONS = [
     email: "audiocolors@gmail.com",
     mapSrc: "https://maps.google.com/maps?q=Quepos+Puntarenas+Costa+Rica&output=embed",
   },
+  {
+    id: "uvita",
+    label: "Uvita",
+    clinic: "AudioColors Uvita",
+    address: "Uvita, Osa, Puntarenas, Costa Rica",
+    phone: "+506 8447-9893",
+    email: "audiocolors@gmail.com",
+    mapSrc: "https://maps.google.com/maps?q=Uvita+Osa+Puntarenas+Costa+Rica&output=embed",
+  },
 ];
 
 function LocationsSection() {
@@ -568,7 +770,7 @@ function LocationsSection() {
           Ubicá nuestros centros de servicio
         </h2>
         <p className="text-[--si-body-color] mb-8 max-w-xl">
-          Contamos con 4 puntos de atención en la zona sur de Costa Rica. Explorá nuestras sedes y
+          Contamos con 5 puntos de atención en la zona sur de Costa Rica. Explorá nuestras sedes y
           descubrí la dirección e información de contacto de cada una.
         </p>
         <Tabs defaultValue="perez-zeledon">
@@ -774,8 +976,19 @@ function SiteFooter() {
           ))}
         </div>
 
-        <div className="border-t border-white/10 py-6 text-sm text-gray-400">
-          <p>© AudioColors 2025. Todos los derechos reservados.</p>
+        <div className="border-t border-white/10 py-6 text-sm text-gray-400 flex flex-wrap items-center justify-between gap-2">
+          <p>© AudioColors {new Date().getFullYear()}. Todos los derechos reservados.</p>
+          <p>
+            Diseño y desarrollo por{" "}
+            <a
+              href="https://github.com/fvillacis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-[--si-primary] transition-colors"
+            >
+              Farid Villacis
+            </a>
+          </p>
         </div>
       </div>
     </footer>
@@ -790,6 +1003,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <CCSSSection />
+      <ReviewsSection />
       <ServicesSection />
       <ProductsSection />
       <SponsorsSection />
