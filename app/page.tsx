@@ -1233,11 +1233,19 @@ function LocationsSection() {
           </TabsList>
           {LOCATIONS.map((loc) => (
             <TabsContent key={loc.id} value={loc.id}>
-              <div className="grid lg:grid-cols-2 gap-8">
-                {/* Info */}
-                <div>
+              {/* Grid 3 col en desktop: info | sede | mapa. En mobile apilado. */}
+              <div
+                className="grid gap-6"
+                style={{
+                  gridTemplateColumns: loc.sedeImage
+                    ? "minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)"
+                    : "minmax(0,1fr) minmax(0,1.4fr)",
+                }}
+              >
+                {/* ── Info ── */}
+                <div className="flex flex-col">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-[--si-primary-faded] flex items-center justify-center font-bold text-[--si-primary]">
+                    <div className="w-12 h-12 rounded-full bg-[--si-primary-faded] flex items-center justify-center font-bold text-[--si-primary] shrink-0">
                       AC
                     </div>
                     <h3 className="text-xl font-bold text-[--si-heading-color]">{loc.clinic}</h3>
@@ -1249,13 +1257,9 @@ function LocationsSection() {
                       { label: "Correo electrónico", value: loc.email, href: `mailto:${loc.email}` },
                     ].map(({ label, value, href }) => (
                       <div key={label}>
-                        <p className="text-[--si-body-color] text-xs uppercase tracking-wide mb-1">
-                          {label}
-                        </p>
+                        <p className="text-[--si-body-color] text-xs uppercase tracking-wide mb-1">{label}</p>
                         {href ? (
-                          <a href={href} className="font-semibold text-[--si-heading-color] hover:text-[--si-primary]">
-                            {value}
-                          </a>
+                          <a href={href} className="font-semibold text-[--si-heading-color] hover:text-[--si-primary]">{value}</a>
                         ) : (
                           <p className="font-semibold text-[--si-heading-color]">{value}</p>
                         )}
@@ -1269,19 +1273,14 @@ function LocationsSection() {
                       </Button>
                     </a>
                     <Separator className="w-full" />
-                    <p className="text-xs text-[--si-body-color] uppercase tracking-wide font-semibold">
-                      Cómo llegar
-                    </p>
-                    <div className="flex gap-3">
-                      {/* Waze */}
+                    <p className="text-xs text-[--si-body-color] uppercase tracking-wide font-semibold">Cómo llegar</p>
+                    <div className="flex gap-3 flex-wrap">
                       <a
                         href={`https://waze.com/ul?q=${encodeURIComponent(loc.address)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target="_blank" rel="noopener noreferrer"
                         className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[--si-border-color] hover:bg-[--si-gray-100] transition-colors text-sm font-medium text-[--si-heading-color]"
-                        title="Abrir en Waze"
                       >
-                        <svg width="20" height="20" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 56 56" fill="none" aria-hidden="true">
                           <circle cx="28" cy="28" r="28" fill="#33CCFF"/>
                           <path d="M28 8C17.5 8 9 16.5 9 27c0 5.8 2.6 11 6.7 14.5.4 2.2.7 4.5.7 4.5s2.5-1.4 4.2-2.3C22.3 44.5 25.1 45 28 45c10.5 0 19-8.5 19-19S38.5 8 28 8z" fill="white"/>
                           <circle cx="22" cy="29" r="2.5" fill="#33CCFF"/>
@@ -1291,17 +1290,13 @@ function LocationsSection() {
                         </svg>
                         Waze
                       </a>
-                      {/* Google Maps */}
                       <a
                         href={`https://maps.google.com/?q=${encodeURIComponent(loc.address)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target="_blank" rel="noopener noreferrer"
                         className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[--si-border-color] hover:bg-[--si-gray-100] transition-colors text-sm font-medium text-[--si-heading-color]"
-                        title="Abrir en Google Maps"
                       >
-                        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#4285F4"/>
-                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="none" stroke="#EA4335" strokeWidth="0"/>
                           <circle cx="12" cy="9" r="2.5" fill="white"/>
                         </svg>
                         Google Maps
@@ -1312,39 +1307,34 @@ function LocationsSection() {
                       ¿Te gustó tu visita? Ayudanos dejando un comentario en Google.
                     </p>
                     <a href={loc.reviewUrl} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" size="sm">
-                        Añadir reseña en Google
-                      </Button>
+                      <Button variant="outline" size="sm">Añadir reseña en Google</Button>
                     </a>
                   </div>
                 </div>
 
-                {/* Map + sede image — columna derecha, ocupa todo el alto */}
-                <div className="flex flex-col gap-4">
-                  {loc.sedeImage ? (
-                    <div className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color] aspect-[4/3] relative">
-                      <img
-                        src={loc.sedeImage}
-                        alt={`Sede ${loc.clinic}`}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                    </div>
-                  ) : null}
-                  <div
-                    className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color]"
-                    style={{ flex: 1, minHeight: "360px" }}
-                  >
-                    <iframe
-                      src={loc.mapSrc}
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0, display: "block", minHeight: "360px" }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title={`Mapa ${loc.clinic}`}
+                {/* ── Foto sede ── solo si existe */}
+                {loc.sedeImage && (
+                  <div className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color] relative" style={{ minHeight: "300px" }}>
+                    <img
+                      src={loc.sedeImage}
+                      alt={`Sede ${loc.clinic}`}
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>
+                )}
+
+                {/* ── Mapa ── */}
+                <div className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color]">
+                  <iframe
+                    src={loc.mapSrc}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, display: "block", minHeight: "420px" }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`Mapa ${loc.clinic}`}
+                  />
                 </div>
               </div>
             </TabsContent>
