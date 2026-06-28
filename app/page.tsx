@@ -1004,6 +1004,52 @@ function LocationsSection() {
   );
 }
 
+// ── Social CTA ────────────────────────────────────────────────────────────────
+
+function SocialSection() {
+  return (
+    <section className="py-20" style={{ backgroundColor: "#0f172a" }}>
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center gap-6">
+        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
+          Comunidad AudioColors
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+          Seguinos en nuestras<br />redes sociales
+        </h2>
+        <p className="text-base" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "440px" }}>
+          Consejos sobre salud auditiva, novedades de la clínica y contenido de nuestros especialistas.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 mt-2">
+          <a
+            href="https://www.instagram.com/audiocolors_/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-white transition-all"
+            style={{ backgroundColor: "#E1306C", fontSize: "0.95rem" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.85"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
+          >
+            <InstagramIcon />
+            @audiocolors_
+          </a>
+          <a
+            href="https://www.facebook.com/p/AudioColors-100068099193403/?locale=es_LA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-white transition-all"
+            style={{ backgroundColor: "#1877F2", fontSize: "0.95rem" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.85"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
+          >
+            <FacebookIcon />
+            AudioColors
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 const FOOTER_COLUMNS = [
@@ -1177,6 +1223,7 @@ export default function Home() {
       <SponsorsSection />
       <TeamSection />
       <LocationsSection />
+      <SocialSection />
       <SiteFooter />
       <WhatsAppFAB />
     </main>
