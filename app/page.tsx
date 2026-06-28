@@ -318,63 +318,28 @@ function HeroSection() {
       {/* ── Desktop layout ── */}
       <div className="hidden lg:block">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-          {/* Two-column grid: left text+team photo | right consultorio photo */}
-          <div className="relative grid grid-cols-2 gap-6 items-start" style={{ minHeight: "560px" }}>
+          {/* Two-column grid: left text | right carrusel equipo (2:3) */}
+          <div className="grid grid-cols-2 gap-8 items-center">
 
-            {/* LEFT: texto arriba + carrusel equipo abajo */}
-            <div className="flex flex-col gap-6">
-              <div className="flex flex-col gap-5 pt-6">
-                <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
-                  Más allá de tus necesidades auditivas
-                </Badge>
-                <h1 className="text-5xl font-extrabold leading-tight text-[--si-heading-color]">
-                  Expertos en soluciones auditivas personalizadas
-                </h1>
-                <p className="text-[--si-body-color]">
-                  ¿Querés saber qué servicios ofrecemos?{" "}
-                  <a href="#servicios" className="text-[--si-primary] font-semibold hover:underline">
-                    Leer más
-                  </a>
-                </p>
-              </div>
-              {/* Carrusel equipo debajo del texto */}
-              <div style={{ height: "340px" }}>
-                <HeroTeamCarousel />
-              </div>
+            {/* LEFT: texto */}
+            <div className="flex flex-col gap-6 py-8">
+              <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
+                Más allá de tus necesidades auditivas
+              </Badge>
+              <h1 className="text-5xl font-extrabold leading-tight text-[--si-heading-color]">
+                Expertos en soluciones auditivas personalizadas
+              </h1>
+              <p className="text-[--si-body-color]">
+                ¿Querés saber qué servicios ofrecemos?{" "}
+                <a href="#servicios" className="text-[--si-primary] font-semibold hover:underline">
+                  Leer más
+                </a>
+              </p>
             </div>
 
-            {/* RIGHT: foto consultorio a full height */}
-            <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ height: "560px" }}>
-              <img
-                src="/images/hero-right.webp"
-                alt="Especialista en audiología en AudioColors Costa Rica"
-                className="absolute inset-0 w-full h-full object-cover object-top"
-              />
-            </div>
-
-            {/* Card naranja — centrada entre las dos columnas, solapando ambas */}
-            <div
-              className="absolute rounded-[--si-border-radius-xl] p-6 shadow-2xl flex flex-col justify-center z-10"
-              style={{
-                backgroundColor: "#f97316",
-                width: "240px",
-                left: "50%",
-                top: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            >
-              <p className="text-white text-[10px] font-semibold uppercase tracking-widest">audio</p>
-              <p className="text-white text-xl font-extrabold leading-tight">COLORS</p>
-              <p className="text-white/70 text-[9px] uppercase tracking-widest mt-0.5 mb-4">
-                Especialidades Audiológicas
-              </p>
-              <p className="text-white text-sm leading-relaxed">
-                Nos encargamos de combinar tecnología avanzada con un enfoque clínico especializado
-                para brindarte un diagnóstico preciso y un tratamiento adaptado a tus necesidades.
-              </p>
-              <p className="text-white text-sm leading-relaxed mt-3">
-                Siempre comprometidos con tu bienestar auditivo y tu calidad de vida.
-              </p>
+            {/* RIGHT: carrusel equipo con aspect ratio 2:3 real de las fotos */}
+            <div className="rounded-[--si-border-radius-xl] overflow-hidden" style={{ aspectRatio: "2/3", maxHeight: "680px" }}>
+              <HeroTeamCarousel />
             </div>
 
           </div>
@@ -382,7 +347,7 @@ function HeroSection() {
       </div>
 
       {/* ── Mobile layout ── */}
-      <div className="lg:hidden mx-auto max-w-7xl px-4 sm:px-6 py-12 flex flex-col gap-5">
+      <div className="lg:hidden mx-auto max-w-7xl px-4 sm:px-6 py-10 flex flex-col gap-5">
         <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
           Más allá de tus necesidades auditivas
         </Badge>
@@ -395,19 +360,8 @@ function HeroSection() {
             Leer más
           </a>
         </p>
-        <div className="rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ aspectRatio: "4/3" }}>
+        <div className="rounded-[--si-border-radius-xl] overflow-hidden w-full" style={{ aspectRatio: "2/3" }}>
           <HeroTeamCarousel />
-        </div>
-        <div
-          className="rounded-[--si-border-radius-xl] p-5 flex flex-col gap-2"
-          style={{ backgroundColor: "#f97316" }}
-        >
-          <p className="text-white text-[10px] font-semibold uppercase tracking-widest">audio</p>
-          <p className="text-white text-lg font-extrabold leading-tight">COLORS</p>
-          <p className="text-white/70 text-[9px] uppercase tracking-widest">Especialidades Audiológicas</p>
-          <p className="text-white text-sm leading-relaxed mt-1">
-            Tecnología avanzada con enfoque clínico especializado para tu bienestar auditivo.
-          </p>
         </div>
       </div>
 
