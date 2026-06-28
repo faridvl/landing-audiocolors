@@ -225,67 +225,107 @@ function Navbar() {
 function HeroSection() {
   return (
     <section className="bg-[--si-body-bg]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* Left */}
-          <div className="flex flex-col gap-5">
-            <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
-              Más allá de tus necesidades auditivas
-            </Badge>
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[--si-heading-color]">
-              Expertos en soluciones auditivas personalizadas
-            </h1>
-            <p className="text-[--si-body-color]">
-              ¿Querés saber qué servicios ofrecemos?{" "}
-              <a href="#servicios" className="text-[--si-primary] font-semibold hover:underline">
-                Leer más
-              </a>
-            </p>
-            <div className="rounded-[--si-border-radius-xl] overflow-hidden mt-2 lg:hidden aspect-[4/3] bg-[--si-gray-100] relative">
-              <img
-                src="/images/team.webp"
-                alt="Equipo de audiólogos de AudioColors en Costa Rica"
-                className="w-full h-full object-cover absolute inset-0"
-              />
-            </div>
-          </div>
+      {/* ── Desktop layout ── */}
+      <div className="hidden lg:block">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+          {/* Two-column grid: left text+team photo | right consultorio photo */}
+          <div className="relative grid grid-cols-2 gap-6 items-start" style={{ minHeight: "560px" }}>
 
-          {/* Right */}
-          <div className="hidden lg:flex gap-3" style={{ height: "560px" }}>
-            {/* Foto equipo — columna principal, más ancha */}
-            <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ flex: "1 1 60%" }}>
-              <img
-                src="/images/team.webp"
-                alt="Equipo de audiólogos AudioColors — Matthew Arias y María José Durán"
-                className="absolute inset-0 w-full h-full object-cover object-top"
-              />
-            </div>
-            {/* Columna derecha — foto consultorio + card naranja */}
-            <div className="flex flex-col gap-3" style={{ flex: "0 0 38%" }}>
-              {/* Foto consultorio — 60% del alto */}
-              <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ flex: "0 0 55%" }}>
+            {/* LEFT: texto arriba + foto equipo abajo */}
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-5 pt-6">
+                <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
+                  Más allá de tus necesidades auditivas
+                </Badge>
+                <h1 className="text-5xl font-extrabold leading-tight text-[--si-heading-color]">
+                  Expertos en soluciones auditivas personalizadas
+                </h1>
+                <p className="text-[--si-body-color]">
+                  ¿Querés saber qué servicios ofrecemos?{" "}
+                  <a href="#servicios" className="text-[--si-primary] font-semibold hover:underline">
+                    Leer más
+                  </a>
+                </p>
+              </div>
+              {/* Foto equipo debajo del texto */}
+              <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ height: "340px" }}>
                 <img
-                  src="/images/hero-right.webp"
-                  alt="Especialista en audiología en AudioColors Costa Rica"
+                  src="/images/team.webp"
+                  alt="Equipo de audiólogos AudioColors — Matthew Arias y María José Durán"
                   className="absolute inset-0 w-full h-full object-cover object-top"
                 />
               </div>
-              {/* Card naranja — 40% del alto */}
-              <div
-                className="rounded-[--si-border-radius-xl] p-5 shadow-[--si-shadow-xl] flex flex-col justify-center"
-                style={{ backgroundColor: "#f97316", flex: "1 1 0" }}
-              >
-                <p className="text-white text-[10px] font-semibold uppercase tracking-widest">audio</p>
-                <p className="text-white text-lg font-extrabold leading-tight">COLORS</p>
-                <p className="text-white/70 text-[9px] uppercase tracking-widest mt-0.5 mb-3">
-                  Especialidades Audiológicas
-                </p>
-                <p className="text-white text-xs leading-relaxed">
-                  Tecnología avanzada con enfoque clínico especializado para tu bienestar auditivo.
-                </p>
-              </div>
             </div>
+
+            {/* RIGHT: foto consultorio a full height */}
+            <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ height: "560px" }}>
+              <img
+                src="/images/hero-right.webp"
+                alt="Especialista en audiología en AudioColors Costa Rica"
+                className="absolute inset-0 w-full h-full object-cover object-top"
+              />
+            </div>
+
+            {/* Card naranja — centrada entre las dos columnas, solapando ambas */}
+            <div
+              className="absolute rounded-[--si-border-radius-xl] p-6 shadow-2xl flex flex-col justify-center z-10"
+              style={{
+                backgroundColor: "#f97316",
+                width: "240px",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <p className="text-white text-[10px] font-semibold uppercase tracking-widest">audio</p>
+              <p className="text-white text-xl font-extrabold leading-tight">COLORS</p>
+              <p className="text-white/70 text-[9px] uppercase tracking-widest mt-0.5 mb-4">
+                Especialidades Audiológicas
+              </p>
+              <p className="text-white text-sm leading-relaxed">
+                Nos encargamos de combinar tecnología avanzada con un enfoque clínico especializado
+                para brindarte un diagnóstico preciso y un tratamiento adaptado a tus necesidades.
+              </p>
+              <p className="text-white text-sm leading-relaxed mt-3">
+                Siempre comprometidos con tu bienestar auditivo y tu calidad de vida.
+              </p>
+            </div>
+
           </div>
+        </div>
+      </div>
+
+      {/* ── Mobile layout ── */}
+      <div className="lg:hidden mx-auto max-w-7xl px-4 sm:px-6 py-12 flex flex-col gap-5">
+        <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
+          Más allá de tus necesidades auditivas
+        </Badge>
+        <h1 className="text-4xl font-extrabold leading-tight text-[--si-heading-color]">
+          Expertos en soluciones auditivas personalizadas
+        </h1>
+        <p className="text-[--si-body-color]">
+          ¿Querés saber qué servicios ofrecemos?{" "}
+          <a href="#servicios" className="text-[--si-primary] font-semibold hover:underline">
+            Leer más
+          </a>
+        </p>
+        <div className="rounded-[--si-border-radius-xl] overflow-hidden aspect-[4/3] bg-[--si-gray-100] relative">
+          <img
+            src="/images/team.webp"
+            alt="Equipo de audiólogos de AudioColors en Costa Rica"
+            className="w-full h-full object-cover absolute inset-0 object-top"
+          />
+        </div>
+        <div
+          className="rounded-[--si-border-radius-xl] p-5 flex flex-col gap-2"
+          style={{ backgroundColor: "#f97316" }}
+        >
+          <p className="text-white text-[10px] font-semibold uppercase tracking-widest">audio</p>
+          <p className="text-white text-lg font-extrabold leading-tight">COLORS</p>
+          <p className="text-white/70 text-[9px] uppercase tracking-widest">Especialidades Audiológicas</p>
+          <p className="text-white text-sm leading-relaxed mt-1">
+            Tecnología avanzada con enfoque clínico especializado para tu bienestar auditivo.
+          </p>
         </div>
       </div>
 
