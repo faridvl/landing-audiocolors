@@ -314,7 +314,7 @@ function HeroTeamCarousel() {
 
 function HeroSection() {
   return (
-    <section className="bg-[--si-body-bg]">
+    <section style={{ backgroundColor: "#0f172a" }}>
       {/* ── Desktop layout ── */}
       <div className="hidden lg:block">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
@@ -326,10 +326,10 @@ function HeroSection() {
               <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
                 Más allá de tus necesidades auditivas
               </Badge>
-              <h1 className="text-5xl font-extrabold leading-tight text-[--si-heading-color]">
+              <h1 className="text-5xl font-extrabold leading-tight" style={{ color: "#ffffff" }}>
                 Expertos en soluciones auditivas personalizadas
               </h1>
-              <p className="text-[--si-body-color]">
+              <p style={{ color: "rgba(255,255,255,0.75)" }}>
                 ¿Querés saber qué servicios ofrecemos?{" "}
                 <a href="#servicios" className="text-[--si-primary] font-semibold hover:underline">
                   Leer más
@@ -351,10 +351,10 @@ function HeroSection() {
         <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
           Más allá de tus necesidades auditivas
         </Badge>
-        <h1 className="text-4xl font-extrabold leading-tight text-[--si-heading-color]">
+        <h1 className="text-4xl font-extrabold leading-tight" style={{ color: "#ffffff" }}>
           Expertos en soluciones auditivas personalizadas
         </h1>
-        <p className="text-[--si-body-color]">
+        <p style={{ color: "rgba(255,255,255,0.75)" }}>
           ¿Querés saber qué servicios ofrecemos?{" "}
           <a href="#servicios" className="text-[--si-primary] font-semibold hover:underline">
             Leer más
@@ -366,12 +366,12 @@ function HeroSection() {
       </div>
 
       {/* Info strip */}
-      <div className="border-t border-[--si-border-color]">
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-[--si-body-color]">
+          <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
             <ClockIcon />
             <span>
-              <strong className="text-[--si-heading-color]">Lun – Vie:</strong> 8:00 am – 4:00 pm
+              <strong className="text-white">Lun – Vie:</strong> 8:00 am – 4:00 pm
             </span>
             <a href="#ubicacion" className="text-[--si-primary] hover:underline ml-2">
               Ver sucursales
@@ -401,8 +401,16 @@ function CCSSSection() {
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
-        <div className="flex items-center justify-center lg:justify-end px-6 lg:px-12 py-16">
-          <div className="bg-white rounded-[--si-border-radius-xl] p-8 w-full max-w-md shadow-[--si-shadow-xl]">
+        <div className="relative flex items-center justify-center lg:justify-end px-6 lg:px-12 py-16 overflow-hidden">
+          {/* Imagen de fondo */}
+          <img
+            src="/images/background-audiocolors.jpeg"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ opacity: 0.18 }}
+          />
+          <div className="relative z-10 bg-white rounded-[--si-border-radius-xl] p-8 w-full max-w-md shadow-[--si-shadow-xl]">
             <h2 className="text-3xl font-extrabold text-[--si-heading-color] mb-4">
               Tramitamos recetas de audífonos de la CCSS
             </h2>
@@ -928,7 +936,7 @@ function ProductsSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-start justify-between gap-6 mb-10">
           <div>
-            <h2 className="text-3xl font-extrabold text-white mb-2">Productos audiológicos</h2>
+            <h2 className="text-3xl font-extrabold mb-2" style={{ color: "#ffffff" }}>Productos audiológicos</h2>
             <p className="text-white/70 max-w-lg">
               Encontrá productos audiológicos que complementan tu cuidado auditivo diario. Explorá
               nuestras opciones y solicitá más información para encontrar la solución ideal para vos.
@@ -1066,7 +1074,8 @@ function TeamMemberCarousel({ member }: { member: typeof TEAM[0] }) {
   return (
     <div className="flex flex-col items-center text-center">
       <div
-        className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-3 aspect-[4/3] bg-[--si-gray-100] relative"
+        className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-3 bg-[--si-gray-100] relative"
+        style={{ aspectRatio: "2/3", maxHeight: "520px" }}
         onMouseEnter={() => { pausedRef.current = true; }}
         onMouseLeave={() => { pausedRef.current = false; }}
       >
@@ -1130,7 +1139,7 @@ function TeamSection() {
           En AudioColors contamos con especialistas comprometidos en brindarte una atención cercana
           y personalizada.
         </p>
-        <div className="grid sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-6 lg:gap-10">
           {TEAM.map((m) => (
             <TeamMemberCarousel key={m.name} member={m} />
           ))}
@@ -1260,9 +1269,47 @@ function LocationsSection() {
                       </Button>
                     </a>
                     <Separator className="w-full" />
+                    <p className="text-xs text-[--si-body-color] uppercase tracking-wide font-semibold">
+                      Cómo llegar
+                    </p>
+                    <div className="flex gap-3">
+                      {/* Waze */}
+                      <a
+                        href={`https://waze.com/ul?q=${encodeURIComponent(loc.address)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[--si-border-color] hover:bg-[--si-gray-100] transition-colors text-sm font-medium text-[--si-heading-color]"
+                        title="Abrir en Waze"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <circle cx="28" cy="28" r="28" fill="#33CCFF"/>
+                          <path d="M28 8C17.5 8 9 16.5 9 27c0 5.8 2.6 11 6.7 14.5.4 2.2.7 4.5.7 4.5s2.5-1.4 4.2-2.3C22.3 44.5 25.1 45 28 45c10.5 0 19-8.5 19-19S38.5 8 28 8z" fill="white"/>
+                          <circle cx="22" cy="29" r="2.5" fill="#33CCFF"/>
+                          <circle cx="34" cy="29" r="2.5" fill="#33CCFF"/>
+                          <path d="M22 35c1.5 2 8.5 2 10 0" stroke="#33CCFF" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="37" cy="15" r="4" fill="#FF6622"/>
+                        </svg>
+                        Waze
+                      </a>
+                      {/* Google Maps */}
+                      <a
+                        href={`https://maps.google.com/?q=${encodeURIComponent(loc.address)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[--si-border-color] hover:bg-[--si-gray-100] transition-colors text-sm font-medium text-[--si-heading-color]"
+                        title="Abrir en Google Maps"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#4285F4"/>
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="none" stroke="#EA4335" strokeWidth="0"/>
+                          <circle cx="12" cy="9" r="2.5" fill="white"/>
+                        </svg>
+                        Google Maps
+                      </a>
+                    </div>
+                    <Separator className="w-full" />
                     <p className="text-sm text-[--si-body-color]">
-                      ¿Te gustó tu visita? Ayudanos dejando un comentario en Google sobre tu
-                      experiencia en AudioColors.
+                      ¿Te gustó tu visita? Ayudanos dejando un comentario en Google.
                     </p>
                     <a href={loc.reviewUrl} target="_blank" rel="noopener noreferrer">
                       <Button variant="outline" size="sm">
@@ -1272,9 +1319,8 @@ function LocationsSection() {
                   </div>
                 </div>
 
-                {/* Map + sede image */}
+                {/* Map + sede image — columna derecha, ocupa todo el alto */}
                 <div className="flex flex-col gap-4">
-                  {/* Imagen de sede */}
                   {loc.sedeImage ? (
                     <div className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color] aspect-[4/3] relative">
                       <img
@@ -1283,53 +1329,21 @@ function LocationsSection() {
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                     </div>
-                  ) : (
-                    <div
-                      className="rounded-[--si-border-radius-xl] border border-dashed border-[--si-border-color] aspect-[4/3] flex flex-col items-center justify-center gap-3"
-                      style={{ backgroundColor: "var(--si-gray-50)" }}
-                    >
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[--si-gray-400]">
-                        <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
-                      </svg>
-                      <p className="text-sm text-[--si-body-color] font-medium">Foto de la sede próximamente</p>
-                      <p className="text-xs text-[--si-gray-400]">{loc.clinic}</p>
-                    </div>
-                  )}
-                  {/* Mapa */}
-                  <div className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color] aspect-[4/3]">
+                  ) : null}
+                  <div
+                    className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color]"
+                    style={{ flex: 1, minHeight: "360px" }}
+                  >
                     <iframe
                       src={loc.mapSrc}
                       width="100%"
                       height="100%"
-                      style={{ border: 0 }}
+                      style={{ border: 0, display: "block", minHeight: "360px" }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       title={`Mapa ${loc.clinic}`}
                     />
-                  </div>
-                  <p className="text-sm text-[--si-body-color]">
-                    También podés encontrar la dirección exacta ingresando a Waze o Google Maps:
-                  </p>
-                  <div className="flex gap-3">
-                    <a
-                      href="https://waze.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-[--si-gray-100] flex items-center justify-center hover:bg-[--si-gray-200] transition-colors"
-                      title="Waze"
-                    >
-                      <span className="text-xs font-bold text-[#33CCFF]">W</span>
-                    </a>
-                    <a
-                      href="https://maps.google.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-[--si-gray-100] flex items-center justify-center hover:bg-[--si-gray-200] transition-colors"
-                      title="Google Maps"
-                    >
-                      <span className="text-xs font-bold text-[#4285F4]">G</span>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -1360,7 +1374,7 @@ function SocialSection() {
         <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
           Comunidad AudioColors
         </p>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+        <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight" style={{ color: "#ffffff" }}>
           Seguinos en nuestras redes sociales
         </h2>
         <p className="text-base" style={{ color: "rgba(255,255,255,0.55)" }}>
