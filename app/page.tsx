@@ -675,48 +675,148 @@ function ReviewsSection() {
 
 const SERVICES = [
   {
-    image: "/images/laboratorio.jpeg",
+    images: null,
     title: "Audiometría Clínica",
     description:
       "Comprende una prueba detallada que nos permite conocer con precisión tu nivel de audición y, de esta forma, detectar cualquier tipo de pérdida auditiva.",
     color: "#ef4444",
   },
   {
-    image: "/images/laboratorio-2.jpeg",
+    images: null,
     title: "Audiometría de Rastreo",
     description:
       "Prueba auditiva rápida que ayuda a identificar si existe algún problema auditivo y evaluar si es necesario hacer estudios más detallados.",
     color: "#f97316",
   },
   {
-    image: "/images/laboratorio.jpeg",
+    images: null,
     title: "Impedanciometría",
     description:
       "Este estudio nos ayuda a revisar cómo está el funcionamiento de tu oído medio, detectando posibles infecciones, tapones o problemas en el tímpano.",
     color: "#eab308",
   },
   {
-    image: "/images/laboratorio-2.jpeg",
+    images: null,
     title: "Salud Auditiva Ocupacional",
     description:
       "Ofrecemos planes para empresas que buscan cuidar la audición de sus colaboradores, cumpliendo con los requisitos de salud laboral.",
     color: "#22c55e",
   },
   {
-    image: "/images/audifonos-1.jpeg",
+    images: ["/images/audifonos-1.jpeg"],
     title: "Prótesis Auditivas",
     description:
       "Adaptamos audífonos según tus necesidades y damos seguimiento para asegurar su buen funcionamiento. También recibimos recetas de audífonos de la CCSS.",
     color: "#3b82f6",
   },
   {
-    image: "/images/service-mantenimiento.webp",
+    images: ["/images/laboratorio.jpeg", "/images/laboratorio-2.jpeg"],
     title: "Servicio de Mantenimiento",
     description:
       "Realizamos servicios de limpieza, revisión y ajustes de tus audífonos, garantizando su correcto funcionamiento y prolongando su vida útil.",
     color: "#a855f7",
   },
 ];
+
+function ServiceImageBlock({ service }: { service: typeof SERVICES[0] }) {
+  const [active, setActive] = React.useState(0);
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const pausedRef = React.useRef(false);
+  const images = service.images;
+
+  React.useEffect(() => {
+    if (!images || images.length <= 1) return;
+    const id = setInterval(() => {
+      if (pausedRef.current) return;
+      setActive((prev) => {
+        const next = (prev + 1) % images.length;
+        const track = trackRef.current;
+        if (track) {
+          const card = track.children[next] as HTMLElement;
+          if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+        }
+        return next;
+      });
+    }, 3000);
+    return () => clearInterval(id);
+  }, [images]);
+
+  function goTo(i: number) {
+    setActive(i);
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.children[i] as HTMLElement;
+    if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  }
+
+  function handleScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const w = (track.children[0] as HTMLElement)?.offsetWidth ?? 1;
+    setActive(Math.round(track.scrollLeft / w));
+  }
+
+  if (!images) {
+    return (
+      <div
+        className="rounded-[--si-border-radius-lg] overflow-hidden aspect-[4/3] mb-4 flex flex-col items-center justify-center gap-2"
+        style={{ backgroundColor: service.color + "15", border: `1.5px dashed ${service.color}55` }}
+      >
+        <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: service.color + "22" }}>
+          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: service.color }} />
+        </div>
+        <span className="text-xs font-medium" style={{ color: service.color }}>Imagen próximamente</span>
+      </div>
+    );
+  }
+
+  if (images.length === 1) {
+    return (
+      <div className="rounded-[--si-border-radius-lg] overflow-hidden aspect-[4/3] mb-4 bg-[--si-gray-100] relative">
+        <img src={images[0]} alt={service.title} className="absolute inset-0 w-full h-full object-cover object-center" />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="rounded-[--si-border-radius-lg] overflow-hidden aspect-[4/3] mb-4 relative"
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
+    >
+      <div
+        ref={trackRef}
+        onScroll={handleScroll}
+        style={{ display: "flex", overflowX: "auto", scrollSnapType: "x mandatory", scrollbarWidth: "none", width: "100%", height: "100%" }}
+      >
+        {images.map((src, i) => (
+          <div key={i} style={{ flex: "0 0 100%", scrollSnapAlign: "start", position: "relative" }}>
+            <img src={src} alt={service.title} className="absolute inset-0 w-full h-full object-cover object-center" />
+          </div>
+        ))}
+      </div>
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Imagen ${i + 1}`}
+            style={{
+              width: i === active ? "1.25rem" : "0.4rem",
+              height: "0.4rem",
+              borderRadius: "9999px",
+              border: "none",
+              cursor: "pointer",
+              transition: "width 0.3s",
+              backgroundColor: i === active ? "white" : "rgba(255,255,255,0.5)",
+              padding: 0,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function ServicesSection() {
   return (
@@ -732,17 +832,7 @@ function ServicesSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES.map((s) => (
             <div key={s.title} className="flex flex-col">
-              <div className="rounded-[--si-border-radius-lg] overflow-hidden aspect-[4/3] mb-4 bg-[--si-gray-100] relative flex items-center justify-center">
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  />
-                <div className="flex flex-col items-center gap-2 pointer-events-none select-none">
-                  <div className="w-8 h-8 rounded-full" style={{ backgroundColor: s.color, opacity: 0.3 }} />
-                  <span className="text-xs text-[--si-gray-400]">{s.title}</span>
-                </div>
-              </div>
+              <ServiceImageBlock service={s} />
               <h3 className="text-lg font-bold text-[--si-heading-color] mb-1">{s.title}</h3>
               <div className="h-1 w-16 rounded-full mb-3" style={{ backgroundColor: s.color }} />
               <p className="text-sm text-[--si-body-color] leading-relaxed">{s.description}</p>
@@ -765,25 +855,28 @@ const PRODUCTS = [
       "/images/audifonos-4.jpeg",
       "/images/audifonos-5.jpeg",
     ],
+    fit: "cover" as const,
     title: "Audífonos",
     description:
       "Prótesis auditivas diseñadas para mejorar tu audición y tu calidad de vida. Contamos con modelos con conectividad al teléfono.",
   },
   {
     images: ["/images/product-deshumidificador.webp"],
+    fit: "contain" as const,
     title: "Deshumidificador",
     description:
       "Deshumidificador para audífonos, ideal para protegerlos de la humedad y alargar su vida útil. Fácil de usar y compatible con todo tipo de audífonos.",
   },
   {
-    images: ["/images/audifonos-5.jpeg"],
+    images: ["/images/baterias.jpeg"],
+    fit: "contain" as const,
     title: "Baterías para audífonos",
     description:
       "Pilas especiales para audífonos, ideales para brindar energía duradera a lo largo del día. Disponibles en distintos tamaños.",
   },
 ];
 
-function ProductImageCarousel({ images, title }: { images: string[]; title: string }) {
+function ProductImageCarousel({ images, title, fit = "cover" }: { images: string[]; title: string; fit?: "cover" | "contain" }) {
   const [active, setActive] = React.useState(0);
   const trackRef = React.useRef<HTMLDivElement>(null);
   const pausedRef = React.useRef(false);
@@ -823,6 +916,7 @@ function ProductImageCarousel({ images, title }: { images: string[]; title: stri
   return (
     <div
       className="aspect-[4/3] overflow-hidden relative"
+      style={{ backgroundColor: fit === "contain" ? "#f8fafc" : undefined }}
       onMouseEnter={() => { pausedRef.current = true; }}
       onMouseLeave={() => { pausedRef.current = false; }}
     >
@@ -840,7 +934,12 @@ function ProductImageCarousel({ images, title }: { images: string[]; title: stri
       >
         {images.map((src, i) => (
           <div key={i} style={{ flex: "0 0 100%", scrollSnapAlign: "start", position: "relative" }}>
-            <img src={src} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+            <img
+              src={src}
+              alt={title}
+              className="absolute inset-0 w-full h-full"
+              style={{ objectFit: fit, objectPosition: "center", padding: fit === "contain" ? "1rem" : undefined }}
+            />
           </div>
         ))}
       </div>
@@ -890,7 +989,7 @@ function ProductsSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {PRODUCTS.map((p) => (
             <Card key={p.title} className="overflow-hidden border-0 shadow-[--si-shadow]">
-              <ProductImageCarousel images={p.images} title={p.title} />
+              <ProductImageCarousel images={p.images} title={p.title} fit={p.fit} />
               <CardContent className="p-5">
                 <h3 className="text-base font-bold text-[--si-heading-color] mb-2">{p.title}</h3>
                 <p className="text-sm text-[--si-body-color] leading-relaxed">{p.description}</p>
@@ -944,7 +1043,7 @@ function SponsorsSection() {
             {[...CONVENIOS, ...CONVENIOS, ...CONVENIOS, ...CONVENIOS].map((l, i) => (
               <div
                 key={i}
-                className="mx-4 h-20 w-36 flex-shrink-0 flex items-center justify-center bg-white rounded-[--si-border-radius] border border-[--si-border-color] px-3 py-2"
+                className="mx-5 h-28 w-48 flex-shrink-0 flex items-center justify-center bg-white rounded-[--si-border-radius] border border-[--si-border-color] px-4 py-3"
               >
                 <img src={l.src} alt={l.name} className="w-full h-full object-contain" />
               </div>
@@ -976,6 +1075,24 @@ const TEAM = [
 function TeamMemberCarousel({ member }: { member: typeof TEAM[0] }) {
   const [active, setActive] = React.useState(0);
   const trackRef = React.useRef<HTMLDivElement>(null);
+  const pausedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (member.images.length <= 1) return;
+    const id = setInterval(() => {
+      if (pausedRef.current) return;
+      setActive((prev) => {
+        const next = (prev + 1) % member.images.length;
+        const track = trackRef.current;
+        if (track) {
+          const card = track.children[next] as HTMLElement;
+          if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+        }
+        return next;
+      });
+    }, 4000);
+    return () => clearInterval(id);
+  }, [member.images.length]);
 
   function goTo(i: number) {
     setActive(i);
@@ -994,7 +1111,11 @@ function TeamMemberCarousel({ member }: { member: typeof TEAM[0] }) {
 
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-3 aspect-[4/3] bg-[--si-gray-100] relative">
+      <div
+        className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-3 aspect-[4/3] bg-[--si-gray-100] relative"
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+      >
         <div
           ref={trackRef}
           onScroll={handleScroll}
