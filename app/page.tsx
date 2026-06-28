@@ -1009,7 +1009,7 @@ function LocationsSection() {
 function SocialSection() {
   return (
     <section className="py-20" style={{ backgroundColor: "#0f172a" }}>
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center gap-6">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center gap-8">
         <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
           Comunidad AudioColors
         </p>
@@ -1019,31 +1019,76 @@ function SocialSection() {
         <p className="text-base" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "440px" }}>
           Consejos sobre salud auditiva, novedades de la clínica y contenido de nuestros especialistas.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 mt-2">
+
+        {/* Profile cards */}
+        <div className="flex flex-col sm:flex-row gap-5 w-full justify-center mt-2">
+
+          {/* Instagram card */}
           <a
             href="https://www.instagram.com/audiocolors_/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-white transition-all"
-            style={{ backgroundColor: "#E1306C", fontSize: "0.95rem" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.85"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
+            className="flex flex-col items-center gap-4 p-6 rounded-2xl transition-transform hover:-translate-y-1 w-full sm:w-56"
+            style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
           >
-            <InstagramIcon />
-            @audiocolors_
+            {/* Avatar con borde degradado Instagram */}
+            <div style={{ padding: "3px", borderRadius: "9999px", background: "linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)" }}>
+              <div style={{ borderRadius: "9999px", padding: "3px", background: "#0f172a" }}>
+                <img
+                  src="https://unavatar.io/instagram/audiocolors_"
+                  alt="Perfil Instagram AudioColors"
+                  width={72}
+                  height={72}
+                  style={{ borderRadius: "9999px", display: "block", objectFit: "cover" }}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/favicon-32.png"; }}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="font-bold text-white text-base">AudioColors</span>
+              <span className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>@audiocolors_</span>
+            </div>
+            <span
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold text-white"
+              style={{ background: "linear-gradient(135deg,#f09433,#dc2743,#bc1888)" }}
+            >
+              <InstagramIcon /> Seguir
+            </span>
           </a>
+
+          {/* Facebook card */}
           <a
             href="https://www.facebook.com/p/AudioColors-100068099193403/?locale=es_LA"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-white transition-all"
-            style={{ backgroundColor: "#1877F2", fontSize: "0.95rem" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.85"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
+            className="flex flex-col items-center gap-4 p-6 rounded-2xl transition-transform hover:-translate-y-1 w-full sm:w-56"
+            style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
           >
-            <FacebookIcon />
-            AudioColors
+            {/* Avatar con borde azul Facebook */}
+            <div style={{ padding: "3px", borderRadius: "9999px", background: "#1877F2" }}>
+              <div style={{ borderRadius: "9999px", padding: "3px", background: "#0f172a" }}>
+                <img
+                  src="https://unavatar.io/facebook/AudioColors-100068099193403"
+                  alt="Perfil Facebook AudioColors"
+                  width={72}
+                  height={72}
+                  style={{ borderRadius: "9999px", display: "block", objectFit: "cover" }}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/favicon-32.png"; }}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="font-bold text-white text-base">AudioColors</span>
+              <span className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>facebook.com</span>
+            </div>
+            <span
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold text-white"
+              style={{ background: "#1877F2" }}
+            >
+              <FacebookIcon /> Seguir
+            </span>
           </a>
+
         </div>
       </div>
     </section>
