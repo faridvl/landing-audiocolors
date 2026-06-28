@@ -708,21 +708,41 @@ const CONVENIOS = [
 
 function SponsorsSection() {
   return (
-    <section className="py-12 bg-[--si-body-bg] border-b border-[--si-border-color]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold text-[--si-body-color] uppercase tracking-widest mb-8">
+    <section className="py-12 bg-[--si-body-bg] border-b border-[--si-border-color] overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
+        <p className="text-sm font-semibold text-[--si-body-color] uppercase tracking-widest">
           Convenios
         </p>
-        <div className="flex flex-wrap items-center gap-8">
-          {CONVENIOS.map((l) => (
-            <div key={l.name} className="h-20 w-36 relative flex items-center justify-center bg-white rounded-[--si-border-radius] border border-[--si-border-color] px-3 py-2">
-              <img
-                src={l.src}
-                alt={l.name}
-                className="w-full h-full object-contain"
-              />
-            </div>
-          ))}
+      </div>
+      <style>{`
+        @keyframes scroll-logos {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .logos-track {
+          display: flex;
+          width: max-content;
+          animation: scroll-logos 18s linear infinite;
+        }
+        .logos-track:hover { animation-play-state: paused; }
+      `}</style>
+      <div className="relative">
+        <div
+          style={{
+            maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+          }}
+        >
+          <div className="logos-track">
+            {[...CONVENIOS, ...CONVENIOS].map((l, i) => (
+              <div
+                key={i}
+                className="mx-4 h-20 w-36 flex-shrink-0 flex items-center justify-center bg-white rounded-[--si-border-radius] border border-[--si-border-color] px-3 py-2"
+              >
+                <img src={l.src} alt={l.name} className="w-full h-full object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
