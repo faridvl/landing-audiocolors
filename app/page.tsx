@@ -335,6 +335,25 @@ function HeroSection() {
                   Leer más
                 </a>
               </p>
+              {/* Horario + CTA */}
+              <div className="flex flex-col gap-4 pt-2">
+                <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+                  <ClockIcon />
+                  <span>
+                    <strong style={{ color: "#ffffff" }}>Lun – Vie:</strong> 8:00 am – 4:00 pm
+                  </span>
+                  <a href="#ubicacion" className="text-[--si-primary] hover:underline ml-1">
+                    Ver sucursales
+                  </a>
+                </div>
+                <div>
+                  <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
+                    <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />}>
+                      Agendar cita
+                    </Button>
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* RIGHT: carrusel equipo con aspect ratio 2:3 real de las fotos */}
@@ -360,28 +379,22 @@ function HeroSection() {
             Leer más
           </a>
         </p>
+        <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+          <ClockIcon />
+          <span>
+            <strong style={{ color: "#ffffff" }}>Lun – Vie:</strong> 8:00 am – 4:00 pm
+          </span>
+          <a href="#ubicacion" className="text-[--si-primary] hover:underline ml-1">
+            Ver sucursales
+          </a>
+        </div>
+        <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
+          <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />}>
+            Agendar cita
+          </Button>
+        </a>
         <div className="rounded-[--si-border-radius-xl] overflow-hidden w-full" style={{ aspectRatio: "2/3" }}>
           <HeroTeamCarousel />
-        </div>
-      </div>
-
-      {/* Info strip */}
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
-            <ClockIcon />
-            <span>
-              <strong className="text-white">Lun – Vie:</strong> 8:00 am – 4:00 pm
-            </span>
-            <a href="#ubicacion" className="text-[--si-primary] hover:underline ml-2">
-              Ver sucursales
-            </a>
-          </div>
-          <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
-            <Button variant="primary" size="sm" iconLeft={<WhatsAppIcon />}>
-              Agendar cita
-            </Button>
-          </a>
         </div>
       </div>
     </section>
