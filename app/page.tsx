@@ -774,7 +774,7 @@ function SponsorsSection() {
           }}
         >
           <div className="logos-track">
-            {[...CONVENIOS, ...CONVENIOS].map((l, i) => (
+            {[...CONVENIOS, ...CONVENIOS, ...CONVENIOS, ...CONVENIOS].map((l, i) => (
               <div
                 key={i}
                 className="mx-4 h-20 w-36 flex-shrink-0 flex items-center justify-center bg-white rounded-[--si-border-radius] border border-[--si-border-color] px-3 py-2"
