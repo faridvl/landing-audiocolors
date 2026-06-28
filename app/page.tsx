@@ -57,6 +57,71 @@ function AudioColorsLogo() {
   );
 }
 
+// ── Topbar ────────────────────────────────────────────────────────────────────
+
+function InstagramIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+function Topbar() {
+  return (
+    <div style={{ backgroundColor: "#0f172a", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4" style={{ height: "36px" }}>
+        {/* Izquierda — teléfono */}
+        <a
+          href="tel:+50688479893"
+          className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
+          style={{ fontSize: "0.75rem" }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
+          </svg>
+          <span className="hidden sm:inline">+506 8447-9893</span>
+        </a>
+
+        {/* Derecha — redes sociales */}
+        <div className="flex items-center gap-1">
+          <span className="text-gray-500 mr-2 hidden sm:inline" style={{ fontSize: "0.7rem", letterSpacing: "0.05em" }}>
+            SEGUINOS
+          </span>
+          <a
+            href="https://www.instagram.com/audiocolors_/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram de AudioColors"
+            className="flex items-center justify-center text-gray-400 hover:text-[#E1306C] transition-colors"
+            style={{ width: "28px", height: "28px", borderRadius: "50%" }}
+          >
+            <InstagramIcon />
+          </a>
+          <a
+            href="https://www.facebook.com/p/AudioColors-100068099193403/?locale=es_LA"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook de AudioColors"
+            className="flex items-center justify-center text-gray-400 hover:text-[#1877F2] transition-colors"
+            style={{ width: "28px", height: "28px", borderRadius: "50%" }}
+          >
+            <FacebookIcon />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Navbar ────────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
@@ -72,6 +137,7 @@ function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full" style={{ backgroundColor: "var(--si-body-bg)", borderBottom: "1px solid var(--si-border-color)", boxShadow: "var(--si-shadow-sm)" }}>
+      <Topbar />
       {/* Rainbow stripe */}
       <div style={{ height: "5px", display: "flex", width: "100%" }}>
         {["#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6", "#a855f7"].map((c) => (
