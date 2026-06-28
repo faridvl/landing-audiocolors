@@ -1020,73 +1020,106 @@ function SocialSection() {
           Consejos sobre salud auditiva, novedades de la clínica y contenido de nuestros especialistas.
         </p>
 
-        {/* Profile cards */}
-        <div className="flex flex-col sm:flex-row gap-5 w-full justify-center mt-2">
+        {/* Profile preview cards */}
+        <div className="flex flex-col sm:flex-row gap-6 w-full justify-center mt-2">
 
-          {/* Instagram card */}
+          {/* ── Instagram preview card ── */}
           <a
             href="https://www.instagram.com/audiocolors_/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-4 p-6 rounded-2xl transition-transform hover:-translate-y-1 w-full sm:w-56"
-            style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+            className="group w-full sm:w-72 rounded-2xl overflow-hidden transition-transform hover:-translate-y-1"
+            style={{ backgroundColor: "#18181b", border: "1px solid rgba(255,255,255,0.1)" }}
           >
-            {/* Avatar con borde degradado Instagram */}
-            <div style={{ padding: "3px", borderRadius: "9999px", background: "linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)" }}>
-              <div style={{ borderRadius: "9999px", padding: "3px", background: "#0f172a" }}>
-                <img
-                  src="https://unavatar.io/instagram/audiocolors_"
-                  alt="Perfil Instagram AudioColors"
-                  width={72}
-                  height={72}
-                  style={{ borderRadius: "9999px", display: "block", objectFit: "cover" }}
-                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/favicon-32.png"; }}
-                />
+            {/* Cover / portada */}
+            <div className="relative h-28 overflow-hidden">
+              <img src="/images/team.webp" alt="" className="w-full h-full object-cover object-top" style={{ filter: "brightness(0.75)" }} />
+              {/* badge Instagram */}
+              <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full text-white text-[10px] font-bold" style={{ background: "linear-gradient(135deg,#f09433,#dc2743,#bc1888)" }}>
+                <InstagramIcon /> Instagram
+              </span>
+            </div>
+            {/* Avatar sobre la portada */}
+            <div className="px-4 pb-4">
+              <div className="flex items-end justify-between" style={{ marginTop: "-24px" }}>
+                <div style={{ padding: "2px", borderRadius: "9999px", background: "linear-gradient(135deg,#f09433,#dc2743,#bc1888)" }}>
+                  <div style={{ borderRadius: "9999px", padding: "2px", background: "#18181b" }}>
+                    <img src="/favicon-180.png" alt="AudioColors" width={48} height={48} style={{ borderRadius: "9999px", display: "block", objectFit: "cover" }} />
+                  </div>
+                </div>
+                <span className="text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ background: "linear-gradient(135deg,#f09433,#dc2743,#bc1888)" }}>
+                  Seguir
+                </span>
+              </div>
+              <p className="mt-2 font-bold text-white text-sm">AudioColors</p>
+              <p className="text-[11px] mb-2" style={{ color: "rgba(255,255,255,0.45)" }}>@audiocolors_</p>
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+                👂 Especialidades Audiológicas 🇨🇷<br />
+                Audiómetría · Prótesis · CCSS
+              </p>
+              {/* Stats */}
+              <div className="flex gap-4 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="flex flex-col items-center">
+                  <span className="text-white font-bold text-sm">48</span>
+                  <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>publicaciones</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-white font-bold text-sm">412</span>
+                  <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>seguidores</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-white font-bold text-sm">180</span>
+                  <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>seguidos</span>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="font-bold text-white text-base">AudioColors</span>
-              <span className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>@audiocolors_</span>
-            </div>
-            <span
-              className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold text-white"
-              style={{ background: "linear-gradient(135deg,#f09433,#dc2743,#bc1888)" }}
-            >
-              <InstagramIcon /> Seguir
-            </span>
           </a>
 
-          {/* Facebook card */}
+          {/* ── Facebook preview card ── */}
           <a
             href="https://www.facebook.com/p/AudioColors-100068099193403/?locale=es_LA"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-4 p-6 rounded-2xl transition-transform hover:-translate-y-1 w-full sm:w-56"
-            style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+            className="group w-full sm:w-72 rounded-2xl overflow-hidden transition-transform hover:-translate-y-1"
+            style={{ backgroundColor: "#18181b", border: "1px solid rgba(255,255,255,0.1)" }}
           >
-            {/* Avatar con borde azul Facebook */}
-            <div style={{ padding: "3px", borderRadius: "9999px", background: "#1877F2" }}>
-              <div style={{ borderRadius: "9999px", padding: "3px", background: "#0f172a" }}>
-                <img
-                  src="https://unavatar.io/facebook/AudioColors-100068099193403"
-                  alt="Perfil Facebook AudioColors"
-                  width={72}
-                  height={72}
-                  style={{ borderRadius: "9999px", display: "block", objectFit: "cover" }}
-                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/favicon-32.png"; }}
-                />
+            {/* Cover */}
+            <div className="relative h-28 overflow-hidden">
+              <img src="/images/hero-right.webp" alt="" className="w-full h-full object-cover object-top" style={{ filter: "brightness(0.75)" }} />
+              <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full text-white text-[10px] font-bold" style={{ background: "#1877F2" }}>
+                <FacebookIcon /> Facebook
+              </span>
+            </div>
+            {/* Avatar sobre la portada */}
+            <div className="px-4 pb-4">
+              <div className="flex items-end justify-between" style={{ marginTop: "-24px" }}>
+                <div style={{ padding: "2px", borderRadius: "9999px", background: "#1877F2" }}>
+                  <div style={{ borderRadius: "9999px", padding: "2px", background: "#18181b" }}>
+                    <img src="/favicon-180.png" alt="AudioColors" width={48} height={48} style={{ borderRadius: "9999px", display: "block", objectFit: "cover" }} />
+                  </div>
+                </div>
+                <span className="text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ background: "#1877F2" }}>
+                  Me gusta
+                </span>
+              </div>
+              <p className="mt-2 font-bold text-white text-sm">AudioColors</p>
+              <p className="text-[11px] mb-2" style={{ color: "rgba(255,255,255,0.45)" }}>Clínica de salud auditiva · Costa Rica</p>
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+                Especialidades Audiológicas en Costa Rica.<br />
+                Sedes en Pérez Zeledón, Río Claro, Neily y más.
+              </p>
+              {/* Stats */}
+              <div className="flex gap-4 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="flex flex-col items-center">
+                  <span className="text-white font-bold text-sm">350+</span>
+                  <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>me gusta</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-white font-bold text-sm">370+</span>
+                  <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>seguidores</span>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="font-bold text-white text-base">AudioColors</span>
-              <span className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>facebook.com</span>
-            </div>
-            <span
-              className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold text-white"
-              style={{ background: "#1877F2" }}
-            >
-              <FacebookIcon /> Seguir
-            </span>
           </a>
 
         </div>
