@@ -185,9 +185,9 @@ function HeroSection() {
           </div>
 
           {/* Right */}
-          <div className="hidden lg:flex gap-4 h-[480px]">
-            {/* Foto equipo — columna principal */}
-            <div className="relative flex-1 rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]">
+          <div className="hidden lg:flex gap-3" style={{ height: "560px" }}>
+            {/* Foto equipo — columna principal, más ancha */}
+            <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ flex: "1 1 60%" }}>
               <img
                 src="/images/team.webp"
                 alt="Equipo de audiólogos AudioColors — Matthew Arias y María José Durán"
@@ -195,22 +195,23 @@ function HeroSection() {
               />
             </div>
             {/* Columna derecha — foto consultorio + card naranja */}
-            <div className="relative w-48 flex flex-col gap-4">
-              <div className="relative flex-1 rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]">
+            <div className="flex flex-col gap-3" style={{ flex: "0 0 38%" }}>
+              {/* Foto consultorio — 60% del alto */}
+              <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ flex: "0 0 55%" }}>
                 <img
                   src="/images/hero-right.webp"
                   alt="Especialista en audiología en AudioColors Costa Rica"
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-cover object-top"
                 />
               </div>
-              {/* Card naranja */}
+              {/* Card naranja — 40% del alto */}
               <div
-                className="rounded-[--si-border-radius-xl] p-4 shadow-[--si-shadow-xl] shrink-0"
-                style={{ backgroundColor: "#f97316" }}
+                className="rounded-[--si-border-radius-xl] p-5 shadow-[--si-shadow-xl] flex flex-col justify-center"
+                style={{ backgroundColor: "#f97316", flex: "1 1 0" }}
               >
                 <p className="text-white text-[10px] font-semibold uppercase tracking-widest">audio</p>
-                <p className="text-white text-base font-extrabold leading-tight">COLORS</p>
-                <p className="text-white/70 text-[9px] uppercase tracking-widest mt-0.5 mb-2">
+                <p className="text-white text-lg font-extrabold leading-tight">COLORS</p>
+                <p className="text-white/70 text-[9px] uppercase tracking-widest mt-0.5 mb-3">
                   Especialidades Audiológicas
                 </p>
                 <p className="text-white text-xs leading-relaxed">
@@ -683,7 +684,7 @@ function TeamSection() {
           En AudioColors contamos con especialistas comprometidos en brindarte una atención cercana
           y personalizada.
         </p>
-        <div className="grid sm:grid-cols-2 gap-8 max-w-3xl">
+        <div className="grid sm:grid-cols-2 gap-8">
           {TEAM.map((m) => (
             <div key={m.name} className="flex flex-col items-center text-center">
               <div className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-4 aspect-[4/3] bg-[--si-gray-100] relative">
@@ -773,7 +774,7 @@ function LocationsSection() {
           descubrí la dirección e información de contacto de cada una.
         </p>
         <Tabs defaultValue="perez-zeledon">
-          <TabsList className="mb-8">
+          <TabsList className="mb-8 flex-wrap h-auto gap-1">
             {LOCATIONS.map((loc) => (
               <TabsTrigger key={loc.id} value={loc.id}>
                 {loc.label}
