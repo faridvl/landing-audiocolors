@@ -1233,15 +1233,8 @@ function LocationsSection() {
           </TabsList>
           {LOCATIONS.map((loc) => (
             <TabsContent key={loc.id} value={loc.id}>
-              {/* Grid 3 col en desktop: info | sede | mapa. En mobile apilado. */}
-              <div
-                className="grid gap-6"
-                style={{
-                  gridTemplateColumns: loc.sedeImage
-                    ? "minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)"
-                    : "minmax(0,1fr) minmax(0,1.4fr)",
-                }}
-              >
+              {/* Grid apilado en mobile, 2 o 3 cols en desktop */}
+              <div className={`grid grid-cols-1 gap-6 ${loc.sedeImage ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
                 {/* ── Info ── */}
                 <div className="flex flex-col">
                   <div className="flex items-center gap-3 mb-6">
