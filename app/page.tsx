@@ -222,6 +222,96 @@ function Navbar() {
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
+const HERO_TEAM_PHOTOS = [
+  { src: "/images/team-1.jpeg", alt: "Equipo AudioColors" },
+  { src: "/images/team-2.jpeg", alt: "Equipo AudioColors en consulta" },
+  { src: "/images/team-3.jpeg", alt: "Especialistas AudioColors" },
+  { src: "/images/team-4.jpeg", alt: "Audiólogos AudioColors" },
+];
+
+function HeroTeamCarousel() {
+  const [active, setActive] = React.useState(0);
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const pausedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      if (pausedRef.current) return;
+      setActive((prev) => {
+        const next = (prev + 1) % HERO_TEAM_PHOTOS.length;
+        const track = trackRef.current;
+        if (track) {
+          const card = track.children[next] as HTMLElement;
+          if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+        }
+        return next;
+      });
+    }, 3500);
+    return () => clearInterval(id);
+  }, []);
+
+  function handleScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const w = (track.children[0] as HTMLElement)?.offsetWidth ?? 1;
+    setActive(Math.round(track.scrollLeft / w));
+  }
+
+  function goTo(i: number) {
+    setActive(i);
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.children[i] as HTMLElement;
+    if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  }
+
+  return (
+    <div
+      className="relative w-full h-full rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]"
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
+    >
+      <div
+        ref={trackRef}
+        onScroll={handleScroll}
+        style={{
+          display: "flex",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        {HERO_TEAM_PHOTOS.map((p, i) => (
+          <div key={i} style={{ flex: "0 0 100%", scrollSnapAlign: "start", position: "relative" }}>
+            <img src={p.src} alt={p.alt} className="absolute inset-0 w-full h-full object-cover object-top" />
+          </div>
+        ))}
+      </div>
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+        {HERO_TEAM_PHOTOS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Foto ${i + 1}`}
+            style={{
+              width: i === active ? "1.25rem" : "0.4rem",
+              height: "0.4rem",
+              borderRadius: "9999px",
+              border: "none",
+              cursor: "pointer",
+              transition: "width 0.3s",
+              backgroundColor: i === active ? "white" : "rgba(255,255,255,0.5)",
+              padding: 0,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function HeroSection() {
   return (
     <section className="bg-[--si-body-bg]">
@@ -231,7 +321,7 @@ function HeroSection() {
           {/* Two-column grid: left text+team photo | right consultorio photo */}
           <div className="relative grid grid-cols-2 gap-6 items-start" style={{ minHeight: "560px" }}>
 
-            {/* LEFT: texto arriba + foto equipo abajo */}
+            {/* LEFT: texto arriba + carrusel equipo abajo */}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-5 pt-6">
                 <Badge variant="info" size="sm" className="self-start uppercase tracking-wide">
@@ -247,13 +337,9 @@ function HeroSection() {
                   </a>
                 </p>
               </div>
-              {/* Foto equipo debajo del texto */}
-              <div className="relative rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ height: "340px" }}>
-                <img
-                  src="/images/team.webp"
-                  alt="Equipo de audiólogos AudioColors — Matthew Arias y María José Durán"
-                  className="absolute inset-0 w-full h-full object-cover object-top"
-                />
+              {/* Carrusel equipo debajo del texto */}
+              <div style={{ height: "340px" }}>
+                <HeroTeamCarousel />
               </div>
             </div>
 
@@ -309,12 +395,8 @@ function HeroSection() {
             Leer más
           </a>
         </p>
-        <div className="rounded-[--si-border-radius-xl] overflow-hidden aspect-[4/3] bg-[--si-gray-100] relative">
-          <img
-            src="/images/team.webp"
-            alt="Equipo de audiólogos de AudioColors en Costa Rica"
-            className="w-full h-full object-cover absolute inset-0 object-top"
-          />
+        <div className="rounded-[--si-border-radius-xl] overflow-hidden bg-[--si-gray-100]" style={{ aspectRatio: "4/3" }}>
+          <HeroTeamCarousel />
         </div>
         <div
           className="rounded-[--si-border-radius-xl] p-5 flex flex-col gap-2"
@@ -593,35 +675,35 @@ function ReviewsSection() {
 
 const SERVICES = [
   {
-    image: "/images/service-audiometria-clinica.jpg",
+    image: "/images/laboratorio.jpeg",
     title: "Audiometría Clínica",
     description:
       "Comprende una prueba detallada que nos permite conocer con precisión tu nivel de audición y, de esta forma, detectar cualquier tipo de pérdida auditiva.",
     color: "#ef4444",
   },
   {
-    image: "/images/service-audiometria-rastreo.jpg",
+    image: "/images/laboratorio-2.jpeg",
     title: "Audiometría de Rastreo",
     description:
       "Prueba auditiva rápida que ayuda a identificar si existe algún problema auditivo y evaluar si es necesario hacer estudios más detallados.",
     color: "#f97316",
   },
   {
-    image: "/images/service-impedanciometria.jpg",
+    image: "/images/laboratorio.jpeg",
     title: "Impedanciometría",
     description:
       "Este estudio nos ayuda a revisar cómo está el funcionamiento de tu oído medio, detectando posibles infecciones, tapones o problemas en el tímpano.",
     color: "#eab308",
   },
   {
-    image: "/images/service-salud-ocupacional.jpg",
+    image: "/images/laboratorio-2.jpeg",
     title: "Salud Auditiva Ocupacional",
     description:
       "Ofrecemos planes para empresas que buscan cuidar la audición de sus colaboradores, cumpliendo con los requisitos de salud laboral.",
     color: "#22c55e",
   },
   {
-    image: "/images/service-protesis.jpg",
+    image: "/images/audifonos-1.jpeg",
     title: "Prótesis Auditivas",
     description:
       "Adaptamos audífonos según tus necesidades y damos seguimiento para asegurar su buen funcionamiento. También recibimos recetas de audífonos de la CCSS.",
@@ -676,24 +758,116 @@ function ServicesSection() {
 
 const PRODUCTS = [
   {
-    image: "/images/product-audifonos.jpg",
+    images: [
+      "/images/audifonos-1.jpeg",
+      "/images/audifonos-2.jpeg",
+      "/images/audifonos-3.jpeg",
+      "/images/audifonos-4.jpeg",
+      "/images/audifonos-5.jpeg",
+    ],
     title: "Audífonos",
     description:
       "Prótesis auditivas diseñadas para mejorar tu audición y tu calidad de vida. Contamos con modelos con conectividad al teléfono.",
   },
   {
-    image: "/images/product-deshumidificador.webp",
+    images: ["/images/product-deshumidificador.webp"],
     title: "Deshumidificador",
     description:
       "Deshumidificador para audífonos, ideal para protegerlos de la humedad y alargar su vida útil. Fácil de usar y compatible con todo tipo de audífonos.",
   },
   {
-    image: "/images/product-baterias.jpg",
+    images: ["/images/audifonos-5.jpeg"],
     title: "Baterías para audífonos",
     description:
       "Pilas especiales para audífonos, ideales para brindar energía duradera a lo largo del día. Disponibles en distintos tamaños.",
   },
 ];
+
+function ProductImageCarousel({ images, title }: { images: string[]; title: string }) {
+  const [active, setActive] = React.useState(0);
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const pausedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (images.length <= 1) return;
+    const id = setInterval(() => {
+      if (pausedRef.current) return;
+      setActive((prev) => {
+        const next = (prev + 1) % images.length;
+        const track = trackRef.current;
+        if (track) {
+          const card = track.children[next] as HTMLElement;
+          if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+        }
+        return next;
+      });
+    }, 3000);
+    return () => clearInterval(id);
+  }, [images.length]);
+
+  function handleScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const w = (track.children[0] as HTMLElement)?.offsetWidth ?? 1;
+    setActive(Math.round(track.scrollLeft / w));
+  }
+
+  function goTo(i: number) {
+    setActive(i);
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.children[i] as HTMLElement;
+    if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  }
+
+  return (
+    <div
+      className="aspect-[4/3] overflow-hidden relative"
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
+    >
+      <div
+        ref={trackRef}
+        onScroll={handleScroll}
+        style={{
+          display: "flex",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        {images.map((src, i) => (
+          <div key={i} style={{ flex: "0 0 100%", scrollSnapAlign: "start", position: "relative" }}>
+            <img src={src} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+      {images.length > 1 && (
+        <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Imagen ${i + 1}`}
+              style={{
+                width: i === active ? "1.25rem" : "0.4rem",
+                height: "0.4rem",
+                borderRadius: "9999px",
+                border: "none",
+                cursor: "pointer",
+                transition: "width 0.3s",
+                backgroundColor: i === active ? "white" : "rgba(255,255,255,0.5)",
+                padding: 0,
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function ProductsSection() {
   return (
@@ -716,14 +890,7 @@ function ProductsSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {PRODUCTS.map((p) => (
             <Card key={p.title} className="overflow-hidden border-0 shadow-[--si-shadow]">
-              <div className="aspect-[4/3] overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: "#f59e0b" }}>
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  />
-                <span className="text-white/80 text-sm font-medium select-none">{p.title}</span>
-              </div>
+              <ProductImageCarousel images={p.images} title={p.title} />
               <CardContent className="p-5">
                 <h3 className="text-base font-bold text-[--si-heading-color] mb-2">{p.title}</h3>
                 <p className="text-sm text-[--si-body-color] leading-relaxed">{p.description}</p>
@@ -792,9 +959,87 @@ function SponsorsSection() {
 // ── Team ──────────────────────────────────────────────────────────────────────
 
 const TEAM = [
-  { name: "Matthew Arias Mena", role: "MSc. Audiología", image: "/images/team-matthew.webp", alt: "Matthew Arias Mena, Audiólogo MSc. en AudioColors Costa Rica" },
-  { name: "María José Durán Arias", role: "MSc. Audiología", image: "/images/team-mariajose.webp", alt: "María José Durán Arias, Audióloga MSc. en AudioColors Costa Rica" },
+  {
+    name: "Matthew Arias Mena",
+    role: "MSc. Audiología",
+    images: ["/images/team-matthew-1.jpeg", "/images/team-matthew.webp"],
+    alt: "Matthew Arias Mena, Audiólogo MSc. en AudioColors Costa Rica",
+  },
+  {
+    name: "María José Durán Arias",
+    role: "MSc. Audiología",
+    images: ["/images/team-maria.jpeg", "/images/team-mariajose.webp"],
+    alt: "María José Durán Arias, Audióloga MSc. en AudioColors Costa Rica",
+  },
 ];
+
+function TeamMemberCarousel({ member }: { member: typeof TEAM[0] }) {
+  const [active, setActive] = React.useState(0);
+  const trackRef = React.useRef<HTMLDivElement>(null);
+
+  function goTo(i: number) {
+    setActive(i);
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.children[i] as HTMLElement;
+    if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  }
+
+  function handleScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const w = (track.children[0] as HTMLElement)?.offsetWidth ?? 1;
+    setActive(Math.round(track.scrollLeft / w));
+  }
+
+  return (
+    <div className="flex flex-col items-center text-center">
+      <div className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-3 aspect-[4/3] bg-[--si-gray-100] relative">
+        <div
+          ref={trackRef}
+          onScroll={handleScroll}
+          style={{
+            display: "flex",
+            overflowX: "auto",
+            scrollSnapType: "x mandatory",
+            scrollbarWidth: "none",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          {member.images.map((src, i) => (
+            <div key={i} style={{ flex: "0 0 100%", scrollSnapAlign: "start", position: "relative" }}>
+              <img src={src} alt={member.alt} className="absolute inset-0 w-full h-full object-cover object-top" />
+            </div>
+          ))}
+        </div>
+        {member.images.length > 1 && (
+          <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+            {member.images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Foto ${i + 1}`}
+                style={{
+                  width: i === active ? "1.25rem" : "0.4rem",
+                  height: "0.4rem",
+                  borderRadius: "9999px",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "width 0.3s",
+                  backgroundColor: i === active ? "white" : "rgba(255,255,255,0.5)",
+                  padding: 0,
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+      <p className="text-sm text-[--si-body-color]">{member.role}</p>
+      <p className="font-bold text-[--si-heading-color]">{member.name}</p>
+    </div>
+  );
+}
 
 function TeamSection() {
   return (
@@ -812,17 +1057,7 @@ function TeamSection() {
         </p>
         <div className="grid sm:grid-cols-2 gap-8">
           {TEAM.map((m) => (
-            <div key={m.name} className="flex flex-col items-center text-center">
-              <div className="w-full rounded-[--si-border-radius-xl] overflow-hidden mb-4 aspect-[4/3] bg-[--si-gray-100] relative">
-                <img
-                  src={m.image}
-                  alt={m.alt}
-                  className="absolute inset-0 w-full h-full object-cover object-top"
-                />
-              </div>
-              <p className="text-sm text-[--si-body-color]">{m.role}</p>
-              <p className="font-bold text-[--si-heading-color]">{m.name}</p>
-            </div>
+            <TeamMemberCarousel key={m.name} member={m} />
           ))}
         </div>
       </div>
@@ -842,6 +1077,7 @@ const LOCATIONS = [
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+PEREZ+ZELEDON,San+Isidro+El+General,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJVVodgNNPoY8RkYuHCT7yYA8",
+    sedeImage: null,
   },
   {
     id: "rio-claro",
@@ -852,6 +1088,7 @@ const LOCATIONS = [
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+RIO+CLARO,Rio+Claro,Puntarenas,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ8algg8lPpI8RisOQMtVnDsU",
+    sedeImage: "/images/sede-rioclaro.jpeg",
   },
   {
     id: "ciudad-neily",
@@ -862,6 +1099,7 @@ const LOCATIONS = [
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+CIUDAD+NEILY,Ciudad+Neily,Corredores,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJN0I8vMVNpI8RhZ5HJnF7ST8",
+    sedeImage: "/images/sede-neily.jpeg",
   },
   {
     id: "quepos",
@@ -872,6 +1110,7 @@ const LOCATIONS = [
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=Quepos+Puntarenas+Costa+Rica&output=embed",
     reviewUrl: "https://maps.google.com/maps?q=AudioColors+Quepos",
+    sedeImage: "/images/sede-quepos.jpeg",
   },
   {
     id: "uvita",
@@ -882,6 +1121,7 @@ const LOCATIONS = [
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=Uvita+Osa+Puntarenas+Costa+Rica&output=embed",
     reviewUrl: "https://maps.google.com/maps?q=AudioColors+Uvita",
+    sedeImage: null,
   },
 ];
 
@@ -957,8 +1197,30 @@ function LocationsSection() {
                   </div>
                 </div>
 
-                {/* Map */}
-                <div>
+                {/* Map + sede image */}
+                <div className="flex flex-col gap-4">
+                  {/* Imagen de sede */}
+                  {loc.sedeImage ? (
+                    <div className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color] aspect-[4/3] relative">
+                      <img
+                        src={loc.sedeImage}
+                        alt={`Sede ${loc.clinic}`}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="rounded-[--si-border-radius-xl] border border-dashed border-[--si-border-color] aspect-[4/3] flex flex-col items-center justify-center gap-3"
+                      style={{ backgroundColor: "var(--si-gray-50)" }}
+                    >
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[--si-gray-400]">
+                        <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
+                      </svg>
+                      <p className="text-sm text-[--si-body-color] font-medium">Foto de la sede próximamente</p>
+                      <p className="text-xs text-[--si-gray-400]">{loc.clinic}</p>
+                    </div>
+                  )}
+                  {/* Mapa */}
                   <div className="rounded-[--si-border-radius-xl] overflow-hidden border border-[--si-border-color] aspect-[4/3]">
                     <iframe
                       src={loc.mapSrc}
@@ -971,10 +1233,10 @@ function LocationsSection() {
                       title={`Mapa ${loc.clinic}`}
                     />
                   </div>
-                  <p className="text-sm text-[--si-body-color] mt-4">
+                  <p className="text-sm text-[--si-body-color]">
                     También podés encontrar la dirección exacta ingresando a Waze o Google Maps:
                   </p>
-                  <div className="flex gap-3 mt-3">
+                  <div className="flex gap-3">
                     <a
                       href="https://waze.com"
                       target="_blank"
