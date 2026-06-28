@@ -1139,7 +1139,7 @@ function TeamSection() {
           En AudioColors contamos con especialistas comprometidos en brindarte una atención cercana
           y personalizada.
         </p>
-        <div className="grid grid-cols-2 gap-6 lg:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-10">
           {TEAM.map((m) => (
             <TeamMemberCarousel key={m.name} member={m} />
           ))}
