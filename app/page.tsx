@@ -81,14 +81,14 @@ function Topbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4" style={{ height: "36px" }}>
         {/* Izquierda — teléfono */}
         <a
-          href="tel:+50688479893"
+          href="tel:+50688713657"
           className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
           style={{ fontSize: "0.75rem" }}
         >
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
           </svg>
-          <span className="hidden sm:inline">+506 8447-9893</span>
+          <span className="hidden sm:inline">+506 8871-3657</span>
         </a>
 
         {/* Derecha — redes sociales */}
@@ -166,7 +166,7 @@ function Navbar() {
 
         {/* Right side */}
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+          <a href="https://wa.me/50688713657" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
             <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />}>
               Agendar cita
             </Button>
@@ -208,7 +208,7 @@ function Navbar() {
             ))}
           </nav>
           <div style={{ marginTop: "1rem" }}>
-            <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
+            <a href="https://wa.me/50688713657" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
               <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />} style={{ width: "100%" }}>
                 Agendar cita
               </Button>
@@ -347,7 +347,7 @@ function HeroSection() {
                   </a>
                 </div>
                 <div>
-                  <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/50688713657" target="_blank" rel="noopener noreferrer">
                     <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />}>
                       Agendar cita
                     </Button>
@@ -388,7 +388,7 @@ function HeroSection() {
             Ver sucursales
           </a>
         </div>
-        <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
+        <a href="https://wa.me/50688713657" target="_blank" rel="noopener noreferrer">
           <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />}>
             Agendar cita
           </Button>
@@ -437,7 +437,7 @@ function CCSSSection() {
               Seguro Social de forma rápida y sencilla, para que obtengás tus audífonos sin
               complicaciones.
             </p>
-            <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/50688713657" target="_blank" rel="noopener noreferrer">
               <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />}>
                 Agendar cita
               </Button>
@@ -955,7 +955,7 @@ function ProductsSection() {
               nuestras opciones y solicitá más información para encontrar la solución ideal para vos.
             </p>
           </div>
-          <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/50688713657" target="_blank" rel="noopener noreferrer">
             <Button variant="light" size="md">
               Solicitar información
             </Button>
@@ -1170,7 +1170,7 @@ const LOCATIONS = [
     label: "Perez Zeledón",
     clinic: "Clínica AudioColors Pérez Zeledón",
     address: "San Isidro de El General, Pérez Zeledón, San José",
-    phone: "+506 8447-9893",
+    phone: "+506 8871-3657",
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+PEREZ+ZELEDON,San+Isidro+El+General,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJVVodgNNPoY8RkYuHCT7yYA8",
@@ -1181,7 +1181,7 @@ const LOCATIONS = [
     label: "Río Claro",
     clinic: "Centro Médico Yireh, Río Claro",
     address: "Detrás de la Ferretería Impala, Provincia de Puntarenas, Río Claro, 60703",
-    phone: "+506 8447-9893",
+    phone: "+506 8871-3657",
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+RIO+CLARO,Rio+Claro,Puntarenas,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ8algg8lPpI8RisOQMtVnDsU",
@@ -1192,7 +1192,7 @@ const LOCATIONS = [
     label: "Ciudad Neily",
     clinic: "AudioColors Ciudad Neily",
     address: "Ciudad Neily, Corredores, Puntarenas",
-    phone: "+506 8447-9893",
+    phone: "+506 8871-3657",
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=AUDIOCOLORS+CIUDAD+NEILY,Ciudad+Neily,Corredores,Costa+Rica&output=embed",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJN0I8vMVNpI8RhZ5HJnF7ST8",
@@ -1203,7 +1203,7 @@ const LOCATIONS = [
     label: "Quepos",
     clinic: "AudioColors Quepos",
     address: "Quepos, Puntarenas, Costa Rica",
-    phone: "+506 8447-9893",
+    phone: "+506 8871-3657",
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=Quepos+Puntarenas+Costa+Rica&output=embed",
     reviewUrl: "https://maps.google.com/maps?q=AudioColors+Quepos",
@@ -1214,7 +1214,7 @@ const LOCATIONS = [
     label: "Uvita",
     clinic: "AudioColors Uvita",
     address: "Uvita, Osa, Puntarenas, Costa Rica",
-    phone: "+506 8447-9893",
+    phone: "+506 8871-3657",
     email: "audiocolors@outlook.com",
     mapSrc: "https://maps.google.com/maps?q=Uvita+Osa+Puntarenas+Costa+Rica&output=embed",
     reviewUrl: "https://maps.google.com/maps?q=AudioColors+Uvita",
@@ -1273,7 +1273,7 @@ function LocationsSection() {
                     ))}
                   </div>
                   <div className="mt-6 flex flex-col gap-3 items-start">
-                    <a href="https://wa.me/50688479893" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/50688713657" target="_blank" rel="noopener noreferrer">
                       <Button variant="primary" size="md" iconLeft={<WhatsAppIcon />}>
                         Agendar cita
                       </Button>
@@ -1506,7 +1506,7 @@ const FOOTER_COLUMNS = [
   {
     title: "Contactános",
     links: [
-      { label: "+506 8447-9893", href: "https://wa.me/50688479893" },
+      { label: "+506 8871-3657", href: "https://wa.me/50688713657" },
       { label: "audiocolors@outlook.com", href: "mailto:audiocolors@outlook.com" },
     ],
   },
@@ -1607,7 +1607,7 @@ function SiteFooter() {
 function WhatsAppFAB() {
   return (
     <a
-      href="https://wa.me/50688479893"
+      href="https://wa.me/50688713657"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Abrir chat de WhatsApp con AudioColors"
